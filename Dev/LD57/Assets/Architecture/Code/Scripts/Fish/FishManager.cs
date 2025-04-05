@@ -22,7 +22,6 @@ public class FishManager : MonoBehaviour
         {
             var spawnedFish = Instantiate(fishPrefab, transform.position, Quaternion.identity);
             fish = spawnedFish.GetComponent<Fish>();
-            //Debug.Log(fishes[fishId].fishId.ToString());
             fish.fishStatus = fishes[fishId];
         }
     }
