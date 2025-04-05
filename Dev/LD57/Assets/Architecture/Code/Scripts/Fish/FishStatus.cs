@@ -9,15 +9,6 @@ public enum FishId
     GoldenFish,
     SiameseFish,
 }
-
-public enum BaitId
-{
-    Meat,
-    Worm,
-    Empty,
-    Greens
-}
-
 [CreateAssetMenu(fileName = "Fish", menuName = "Fish/New Fish")]
 public class FishStatus : ScriptableObject
 {

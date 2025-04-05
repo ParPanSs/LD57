@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -8,15 +9,19 @@ public class GameManager : MonoBehaviour
 
     private const KeyCode CANCEL_KEY_CODE = KeyCode.Escape;
     private const KeyCode HOOK_KEY_CODE = KeyCode.E;
+    private const KeyCode BAIT_KEY_CODE = KeyCode.Q;
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
     [SerializeField] private float _aimingSpeed;
     [SerializeField] private HookController _hookController;
     [SerializeField] private Slider _aimingSlider;
-    [SerializeField] private FishManager fishManager;
+    [SerializeField] private FishManager _fishManager; 
+    [SerializeField] private BaitManager _baitManager;
+    public BaitManager BaitManager => _baitManager;
+
     
-    private PlayerActionType _actionType;
-    public PlayerActionType ActionType => _actionType;
+    private PlayerActionState _actionState;
+    public PlayerActionState ActionState => _actionState;
 
     private void Awake()
     {
@@ -25,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(_actionType == PlayerActionType.Aiming)
+        if(_actionState == PlayerActionState.Aiming)
         {
             Aiming();
         }
@@ -47,16 +52,20 @@ public class GameManager : MonoBehaviour
         {
             CatchHandle();
         }
+        if (Input.GetKeyDown(BAIT_KEY_CODE))
+        {
+            BaitHandler();
+        }
     }
 
     #region Hook Methods
     private void HookHandle()
     {
-        if (_actionType == PlayerActionType.Idle)
+        if (_actionState == PlayerActionState.Idle)
         {
             StartAiming();
         }
-        else if (_actionType == PlayerActionType.Aiming)
+        else if (_actionState == PlayerActionState.Aiming)
         {
             StartHooking();
         }
@@ -65,7 +74,7 @@ public class GameManager : MonoBehaviour
     private void StartAiming()
     {
         _aimingSlider.gameObject.SetActive(true);
-        _actionType = PlayerActionType.Aiming;
+        _actionState = PlayerActionState.Aiming;
         _aimingSlider.value = _aimingSlider.minValue; 
     } 
     private void Aiming()
@@ -77,7 +86,7 @@ public class GameManager : MonoBehaviour
     private void StartHooking()
     {
         _aimingSlider.gameObject.SetActive(false); 
-        _actionType = PlayerActionType.Hooking;
+        _actionState = PlayerActionState.Hooking;
         _hookController.StartHooking(_aimingSlider.value);
     }
     #endregion
@@ -85,7 +94,7 @@ public class GameManager : MonoBehaviour
     #region Catch Methods
     private void CatchHandle()
     {
-        if(_actionType == PlayerActionType.Hooking)
+        if(_actionState == PlayerActionState.Hooking)
         {
             StartCatching();
         }
@@ -93,27 +102,53 @@ public class GameManager : MonoBehaviour
 
     public void StartCatching()
     {
-        _actionType = PlayerActionType.Catching;
+        _actionState = PlayerActionState.Catching;
         _hookController.StartCatching();
     }
 
     public void StopCatching()
     {
-        _actionType = PlayerActionType.Idle;
+        _actionState = PlayerActionState.Idle;
     }
     #endregion
 
+    #region Bait Methods
+    private void BaitHandler()
+    {
+        if(_actionState == PlayerActionState.Idle)
+        {
+            _actionState = PlayerActionState.SelectingBait;
+            _baitManager.ToggleBaitsPanelActive(true);
+        }
+        else if(_actionState == PlayerActionState.SelectingBait)
+        {
+            _actionState = PlayerActionState.Idle; 
+            _baitManager.ToggleBaitsPanelActive(false); 
+        }
+    }
+
+    public void SelectBait(BaitId baitId)
+    {
+        _actionState = PlayerActionState.Idle; 
+        _baitManager.ToggleBaitsPanelActive(false); 
+        _hookController.SetBait(baitId);
+    }
+    #endregion
     private void CancelHandle()
     {
-        switch (_actionType)
+        switch (_actionState)
         {
-            case PlayerActionType.Idle:
+            case PlayerActionState.Idle:
                 break;
-            case PlayerActionType.Aiming:
-                _actionType = PlayerActionType.Idle;
+            case PlayerActionState.Aiming:
+                _actionState = PlayerActionState.Idle;
                 _aimingSlider.gameObject.SetActive(false);
                 break;
-            case PlayerActionType.Hooking:
+            case PlayerActionState.Hooking:
+                break;
+            case PlayerActionState.SelectingBait: 
+                _actionState = PlayerActionState.Idle;
+                _baitManager.ToggleBaitsPanelActive(false);
                 break;
             default:
                 break;
@@ -123,13 +158,15 @@ public class GameManager : MonoBehaviour
     [Button("SpawnFish")]
     private void SpawnFish()
     {
-        fishManager.SpawnRandomFish();
+        _fishManager.SpawnRandomFish();
     }
 }
-public enum PlayerActionType
+public enum PlayerActionState
 {
     Idle,
     Aiming,
     Hooking, 
-    Catching
+    Catching,
+    SelectingBait,
+
 }
