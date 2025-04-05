@@ -193,8 +193,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2b3ff408133c4468d303ef525ae987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fishZone: {fileID: 0}
   wanderRadius: 7.62
-  moveSpeed: 2
-  waitTime: 2
+  minMoveSpeed: 2
+  maxMoveSpeed: 5
+  waitTime: 0.1
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49863708
+      value: 1.0004421
+      inSlope: -0.005482582
+      outSlope: -0.005482582
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16359092
+    - serializedVersion: 3
+      time: 0.99998134
+      value: 0.000006839633
+      inSlope: 0.08728169
+      outSlope: 0.08728169
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10934396
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  moveDuration: 3
   fishStatus: {fileID: 0}

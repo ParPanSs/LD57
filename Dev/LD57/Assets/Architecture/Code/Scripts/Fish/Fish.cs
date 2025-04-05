@@ -2,63 +2,79 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    //[SerializeField] private Collider2D _fishZone;
-    [SerializeField] private float wanderRadius = 5f;     // Радиус области, по которой NPC может ходить
-    [SerializeField] private float moveSpeed = 2f;        // Скорость движения
-    [SerializeField] private float waitTime = 2f;         // Время ожидания перед следующим движением
-
-    private SpriteRenderer _spriteRenderer;
-    private Collider2D _collider;
-    private Rigidbody2D _rb;
-    private Vector2 startPosition;
-    private Vector2 targetPosition;
-    private bool isWaiting = false;
-    private float waitTimer = 0f;
+    [SerializeField] private float wanderRadius;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float moveDuration;
+    [SerializeField] private AnimationCurve speedCurve;
     
+    private SpriteRenderer _spriteRenderer;
+    private Vector2 startPosition;
+    private Vector2 fromPosition;
+    private Vector2 targetPosition;
+    private float timer;
+    private bool isMoving;
+    private bool isWaiting;
+
     public FishStatus fishStatus;
     
     private void Awake()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _collider = GetComponent<Collider2D>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        _spriteRenderer.sprite = fishStatus.fishSprite;
+        if (fishStatus != null)
+            _spriteRenderer.sprite = fishStatus.fishSprite;
+
         startPosition = transform.position;
-        ChooseNewTarget();
+        BeginNewMovement();
     }
 
     private void Update()
     {
         if (isWaiting)
         {
-            waitTimer += Time.deltaTime;
-            if (waitTimer >= waitTime)
+            timer += Time.deltaTime;
+            if (timer >= waitTime)
             {
                 isWaiting = false;
-                ChooseNewTarget();
+                BeginNewMovement();
             }
+
             return;
         }
 
-        // Двигаем NPC к цели
-        transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-
-        // Если достиг цели
-        if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
+        if (isMoving)
         {
-            isWaiting = true;
-            waitTimer = 0f;
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / moveDuration);
+            float curveT = speedCurve.Evaluate(t);
+
+            transform.position = Vector2.Lerp(fromPosition, targetPosition, curveT);
+
+            Vector2 direction = targetPosition - fromPosition;
+            if (direction.x != 0)
+                _spriteRenderer.flipX = direction.x < 0;
+
+            if (t >= 1f)
+            {
+                isMoving = false;
+                isWaiting = true;
+                timer = 0f;
+            }
         }
     }
-    
-    private void ChooseNewTarget()
+
+    private void BeginNewMovement()
     {
+        fromPosition = transform.position;
         Vector2 randomOffset = Random.insideUnitCircle * wanderRadius;
         targetPosition = startPosition + randomOffset;
+
+        timer = 0f;
+        isMoving = true;
     }
 
     private void OnDrawGizmosSelected()
@@ -66,6 +82,4 @@ public class Fish : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(Application.isPlaying ? startPosition : transform.position, wanderRadius);
     }
-    
-    
 }
