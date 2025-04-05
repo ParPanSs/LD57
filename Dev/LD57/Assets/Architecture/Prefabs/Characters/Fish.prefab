@@ -193,4 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d2b3ff408133c4468d303ef525ae987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fishZone: {fileID: 0}
+  wanderRadius: 7.62
+  moveSpeed: 2
+  waitTime: 2
   fishStatus: {fileID: 0}

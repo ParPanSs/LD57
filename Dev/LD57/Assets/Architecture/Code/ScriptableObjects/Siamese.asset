@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishId: 0
   fishSpeed: 15
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: 21300000, guid: 143b028f0691d8b42a8321f87eb716cf, type: 3}
   fishAmount: 1
   needBait: 0
   baitId: 0

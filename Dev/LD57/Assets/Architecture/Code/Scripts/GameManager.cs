@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -9,13 +10,11 @@ public class GameManager : MonoBehaviour
     private const KeyCode HOOK_KEY_CODE = KeyCode.E;
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
-    [SerializeField]
-    private float _aimingSpeed;
-    [SerializeField]
-    private HookController _hookController;
-    [SerializeField]
-    private Slider _aimingSlider;
-
+    [SerializeField] private float _aimingSpeed;
+    [SerializeField] private HookController _hookController;
+    [SerializeField] private Slider _aimingSlider;
+    [SerializeField] private FishManager fishManager;
+    
     private PlayerActionType _actionType;
     public PlayerActionType ActionType => _actionType;
 
@@ -119,6 +118,12 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    [Button("SpawnFish")]
+    private void SpawnFish()
+    {
+        fishManager.SpawnRandomFish();
     }
 }
 public enum PlayerActionType

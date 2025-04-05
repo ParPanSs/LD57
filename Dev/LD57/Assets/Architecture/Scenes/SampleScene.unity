@@ -1224,6 +1224,7 @@ MonoBehaviour:
   _aimingSpeed: 1
   _hookController: {fileID: 255437940}
   _aimingSlider: {fileID: 1631743407}
+  fishManager: {fileID: 1579733982}
 --- !u!4 &1353484355
 Transform:
   m_ObjectHideFlags: 0
@@ -1452,6 +1453,63 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 545761893}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579733981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1579733983}
+  - component: {fileID: 1579733982}
+  m_Layer: 0
+  m_Name: FishManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1579733982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579733981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5e821f626356d4eb0296146a239f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishes:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 11400000, guid: a45ef05c58c8a804ab654ca246362e29, type: 2}
+    - Key: 1
+      Value: {fileID: 11400000, guid: addb7e47da09b7f4a893ab419d8fb4bd, type: 2}
+    - Key: 3
+      Value: {fileID: 11400000, guid: 97e7333e3be5e574a8a01eb0f384d0e5, type: 2}
+    - Key: 2
+      Value: {fileID: 11400000, guid: 7f202ef7b9437b146b0bfeef78cc9dcb, type: 2}
+    - Key: 4
+      Value: {fileID: 11400000, guid: 994cfe07258986847a7701dbb3aad59c, type: 2}
+  fishPrefab: {fileID: 8297442038795955781, guid: 1e1275518c82b3a4c82c870c2f8855a2, type: 3}
+--- !u!4 &1579733983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579733981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.32357606, y: -0.11903008, z: -0.023611968}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1631743405
 GameObject:
@@ -1916,3 +1974,4 @@ SceneRoots:
   - {fileID: 166117348}
   - {fileID: 53034451}
   - {fileID: 683291429}
+  - {fileID: 1579733983}
