@@ -19,7 +19,7 @@ public class Fish : MonoBehaviour
     
     private void Awake()
     {
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>(); 
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
