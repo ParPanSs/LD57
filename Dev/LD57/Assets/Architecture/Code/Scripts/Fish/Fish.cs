@@ -1,4 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
+
+[System.Serializable]
+public struct FishParameters
+{
+    public List<Animator> animators;
+}
 
 public class Fish : MonoBehaviour
 {
@@ -6,79 +13,74 @@ public class Fish : MonoBehaviour
     [SerializeField] private float waitTime;
     [SerializeField] private float moveDuration;
     [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private FishParameters parameters;
     
-    private SpriteRenderer _spriteRenderer;
-    private Vector2 startPosition;
-    private Vector2 fromPosition;
-    private Vector2 targetPosition;
-    private float timer;
-    private bool isMoving;
-    private bool isWaiting;
+    private Collider2D _collider;
+    private Vector2 _startPosition;
+    private Vector2 _fromPosition;
+    private Vector2 _targetPosition;
+    private float _timer;
+    private bool _isMoving;
+    private bool _isWaiting;
 
     public FishStatus fishStatus;
-    
+
     private void Awake()
     {
-        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _collider = GetComponent<Collider2D>();
     }
-
+    
     private void Start()
     {
-        if (fishStatus != null)
-            _spriteRenderer.sprite = fishStatus.fishSprite;
-
-        startPosition = transform.position;
+        _startPosition = transform.position;
         BeginNewMovement();
     }
 
     private void Update()
     {
-        if (isWaiting)
+        if (_isWaiting)
         {
-            timer += Time.deltaTime;
-            if (timer >= waitTime)
+            _timer += Time.deltaTime;
+            if (_timer >= waitTime)
             {
-                isWaiting = false;
+                _isWaiting = false;
                 BeginNewMovement();
             }
-
             return;
         }
 
-        if (isMoving)
+        if (_isMoving)
         {
-            timer += Time.deltaTime;
-            float t = Mathf.Clamp01(timer / moveDuration);
+            _timer += Time.deltaTime;
+            float t = Mathf.Clamp01(_timer / moveDuration);
             float curveT = speedCurve.Evaluate(t);
 
-            transform.position = Vector2.Lerp(fromPosition, targetPosition, curveT);
+            transform.position = Vector2.Lerp(_fromPosition, _targetPosition, curveT);
 
-            Vector2 direction = targetPosition - fromPosition;
-            if (direction.x != 0)
-                _spriteRenderer.flipX = direction.x < 0;
-
+            Vector2 direction = _targetPosition - _fromPosition;
+            
             if (t >= 1f)
             {
-                isMoving = false;
-                isWaiting = true;
-                timer = 0f;
+                _isMoving = false;
+                _isWaiting = true;
+                _timer = 0f;
             }
         }
     }
 
     private void BeginNewMovement()
     {
-        fromPosition = transform.position;
+        _fromPosition = transform.position;
         Vector2 randomOffset = Random.insideUnitCircle * wanderRadius;
-        targetPosition = startPosition + randomOffset;
+        _targetPosition = _startPosition + randomOffset;
 
-        timer = 0f;
-        isMoving = true;
+        _timer = 0f;
+        _isMoving = true;
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Application.isPlaying ? startPosition : transform.position, wanderRadius);
+        Gizmos.DrawWireSphere(Application.isPlaying ? _startPosition : transform.position, wanderRadius);
     }
 }
