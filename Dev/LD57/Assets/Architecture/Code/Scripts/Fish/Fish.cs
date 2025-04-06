@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public struct FishParameters
@@ -9,13 +10,12 @@ public struct FishParameters
 }
 
 public class Fish : Catchable
-{
+{ 
     [SerializeField] private float wanderRadius;
     [SerializeField] private float waitTime;
     [SerializeField] private float moveDuration;
     [SerializeField] private AnimationCurve speedCurve;
     [SerializeField] private FishParameters fishParameters;
-
     private Collider2D _collider;
     private Vector2 _startPosition;
     private Vector2 _startScale;
@@ -27,6 +27,8 @@ public class Fish : Catchable
     private ActionType _actionType;
     private Transform _detectedTransform;
     public FishStatus fishStatus;
+
+    [SerializeField] private UnityEvent OnCatch;
 
     private void Awake()
     {
@@ -122,6 +124,7 @@ public class Fish : Catchable
             LeanTween.rotateZ(gameObject, 70 * -sign, 1).setDelay(0.3f);
             Vector3 newPos = new Vector3(1.5f * sign, -2, 0);
             LeanTween.moveLocal(gameObject, newPos, 1).setDelay(0.3f);
+            OnCatch.Invoke();
             return true;
         }
         else
