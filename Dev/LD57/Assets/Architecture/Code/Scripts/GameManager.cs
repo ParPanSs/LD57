@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public PlayerActionState ActionState => _actionState;
     public static bool isAnglerCatched;
     public static bool isEndlessMode;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
                 BaitManager.InitizlizeBait((catchable as Bait).BaitId);
                 if (IsCatchableObjectOpened(CatchableObjectType.Bucket))
                 {
-                    _catchedObjects[CatchableObjectType.Bucket][1].SetActive(true); 
+                    _catchedObjects[CatchableObjectType.Bucket][1].SetActive(true);
                 }
                 break;
             case CatchableType.Fish:
@@ -167,9 +167,12 @@ public class GameManager : MonoBehaviour
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
-                foreach (var item in _catchedObjects[type])
-                {
-                    item.SetActive(true);
+                if (_catchedObjects.ContainsKey(type))
+                { 
+                    foreach (var item in _catchedObjects[type])
+                    {
+                        item.SetActive(true);
+                    }
                 }
                 break;
             default:
@@ -266,8 +269,8 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-     
-     
+
+
 }
 public enum PlayerActionState
 {
