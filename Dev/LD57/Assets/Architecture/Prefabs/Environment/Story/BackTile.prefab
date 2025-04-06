@@ -69,13 +69,12 @@ MonoBehaviour:
   _spawnContainers:
   - minY_Point: {fileID: 944537239039418683}
     maxY_Point: {fileID: 8640539894306344392}
-    time: 10
   - minY_Point: {fileID: 2318547102657136398}
     maxY_Point: {fileID: 6462904653889802138}
-    time: 30
+  - minY_Point: {fileID: 2318547102657136398}
+    maxY_Point: {fileID: 6462904653889802138}
   - minY_Point: {fileID: 5958439898176689746}
     maxY_Point: {fileID: 1964348934466288419}
-    time: 90
 --- !u!61 &1936577578304302299
 BoxCollider2D:
   m_ObjectHideFlags: 0

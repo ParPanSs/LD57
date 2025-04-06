@@ -1671,11 +1671,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &955814951 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1964348934466288419, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-  m_PrefabInstance: {fileID: 689728152928341789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &980716589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,11 +2872,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1561943354 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2318547102657136398, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-  m_PrefabInstance: {fileID: 689728152928341789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1568358820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3666,16 +3656,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898549067}
   m_CullTransparentMesh: 1
---- !u!4 &2112933781 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5958439898176689746, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-  m_PrefabInstance: {fileID: 689728152928341789}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2140073906 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6462904653889802138, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-  m_PrefabInstance: {fileID: 689728152928341789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &689728152928341789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3780,26 +3760,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6464345552852021156, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-      propertyPath: _spawnContainers.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6464345552852021156, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-      propertyPath: _spawnContainers.Array.data[0].maxY_Point
-      value: 
-      objectReference: {fileID: 2140073906}
-    - target: {fileID: 6464345552852021156, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-      propertyPath: _spawnContainers.Array.data[0].minY_Point
-      value: 
-      objectReference: {fileID: 1561943354}
-    - target: {fileID: 6464345552852021156, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-      propertyPath: _spawnContainers.Array.data[1].maxY_Point
-      value: 
-      objectReference: {fileID: 955814951}
-    - target: {fileID: 6464345552852021156, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
-      propertyPath: _spawnContainers.Array.data[1].minY_Point
-      value: 
-      objectReference: {fileID: 2112933781}
     - target: {fileID: 6486655415820225494, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
       propertyPath: m_Mesh
       value: 

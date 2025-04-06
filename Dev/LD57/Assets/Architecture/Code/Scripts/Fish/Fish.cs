@@ -116,7 +116,7 @@ public class Fish : Catchable
         {
             return false;
         }
-        if (baitId == fishStatus.baitId)
+        if (baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
         {
             fishParameters.animators[FishId.Carp].SetTrigger("OnTheHook");
             _actionType = ActionType.Hooked;
