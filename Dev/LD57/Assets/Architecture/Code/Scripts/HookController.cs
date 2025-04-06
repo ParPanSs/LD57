@@ -12,6 +12,7 @@ public class HookController : MonoBehaviour
     private float _mainSpeed = 25;
     private float _movementSpeed = 0.6f;
     private float _xFactor = 0f;
+    private float _shakingTime = 0.3f;
     private float _speed;
     private bool _isAnimated;
     private Transform _cameraTransform;
@@ -53,7 +54,7 @@ public class HookController : MonoBehaviour
         _hookingHint.SetActive(false);
         _xFactor = 0;
         _isAnimated = true;
-        LeanTween.moveX(gameObject, transform.position.x + 0.5f, 0.3f).setEaseShake().setOnComplete(() =>
+        LeanTween.moveX(gameObject, transform.position.x + 0.5f, _shakingTime).setEaseShake().setOnComplete(() =>
         {
             _isAnimated = false;
         });
@@ -136,11 +137,12 @@ public class HookController : MonoBehaviour
         {
             bool canCatch = true;
             Vector3 pos = Vector3.zero;
+            _shakingTime = catchable.ShakingTime;
             if (catchable.CatchableType == CatchableType.Fish)
             {
                 canCatch = (catchable as Fish).TryToHook(_baitId);
                 float sign = Mathf.Sign(catchable.transform.localScale.x);
-                pos.x = 2*sign;
+                pos.x = 2*sign; 
             }
             if (canCatch)
             {
