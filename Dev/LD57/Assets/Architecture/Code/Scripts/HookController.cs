@@ -92,7 +92,11 @@ public class HookController : MonoBehaviour
 
                 _xFactor -= Time.deltaTime * (Mathf.Sign(_xFactor) * 0.5f);
                 _speed -= Time.deltaTime * 0.05f;
-                transform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed;
+
+                var newPosition = transform.position;
+                newPosition += moveDirection * Time.deltaTime * _speed * _mainSpeed;
+                newPosition.x = Mathf.Clamp(newPosition.x, -15, 15);
+                transform.position = newPosition;
                 _cameraTransform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed;
                 if (_speed <= 0)
                 {
