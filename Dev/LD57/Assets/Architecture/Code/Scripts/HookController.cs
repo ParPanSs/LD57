@@ -140,13 +140,13 @@ public class HookController : MonoBehaviour
             {
                 canCatch = (catchable as Fish).TryToHook(_baitId);
                 float sign = Mathf.Sign(catchable.transform.localScale.x);
-                pos.y = 2*sign;
+                pos.x = 2*sign;
             }
             if (canCatch)
             {
                 _catchedObject = catchable;
                 _catchedObject.transform.SetParent(transform);
-                _catchedObject.transform.localPosition = Vector3.zero;
+                _catchedObject.transform.localPosition = pos;
             }
                 GameManager.Instance.StartCatching(); 
         }

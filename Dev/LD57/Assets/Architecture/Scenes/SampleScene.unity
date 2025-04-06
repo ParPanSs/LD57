@@ -2748,7 +2748,7 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: 7f202ef7b9437b146b0bfeef78cc9dcb, type: 2}
     - Key: 4
       Value: {fileID: 11400000, guid: 994cfe07258986847a7701dbb3aad59c, type: 2}
-  spawnRadius: 5
+  spawnRadius: 0
   fishPrefab: {fileID: 8297442038795955781, guid: 1e1275518c82b3a4c82c870c2f8855a2, type: 3}
 --- !u!4 &1579733983
 Transform:

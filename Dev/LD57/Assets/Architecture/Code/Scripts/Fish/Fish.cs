@@ -77,6 +77,11 @@ public class Fish : Catchable
                 }
                 break;
             case ActionType.Detected:
+                if (_detectedTransform.position.y > -2)
+                {
+                    UndetectHook();
+                    return;
+                }
                 Vector3 toHookDirection = (_detectedTransform.position - transform.position).normalized;
                 float sign = Mathf.Sign(toHookDirection.x) * -1;
                 transform.localScale = new Vector3(_startScale.x * sign, transform.localScale.y, transform.localScale.z);

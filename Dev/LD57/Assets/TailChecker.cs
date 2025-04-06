@@ -6,7 +6,7 @@ public class TailChecker : MonoBehaviour
     {
         if (other.CompareTag("Tile"))
         {
-            if (GameManager.Instance.Tails.FindLast((x => x == other.gameObject)))
+            if (GameManager.Instance.Tails[GameManager.Instance.Tails.Count-1] == other.gameObject)
             {
                 var parent = other.transform.parent;
                 Vector2 spawnPosition = new(other.transform.position.x, other.transform.position.y - other.bounds.size.y);
