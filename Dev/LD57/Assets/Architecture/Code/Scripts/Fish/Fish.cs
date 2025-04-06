@@ -10,7 +10,8 @@ public struct FishParameters
 }
 
 public class Fish : Catchable
-{ 
+{
+    [SerializeField] private bool initOnStart;
     [SerializeField] private float wanderRadius;
     [SerializeField] private float waitTime;
     [SerializeField] private float moveDuration;
@@ -32,6 +33,10 @@ public class Fish : Catchable
 
     private void Awake()
     {
+        foreach (var item in fishParameters.animators)
+        {
+            item.Value.gameObject.SetActive(false);
+        }
         _collider = GetComponent<Collider2D>();
     }
 
@@ -39,12 +44,16 @@ public class Fish : Catchable
     {
         _startPosition = transform.position;
         _startScale = transform.localScale;
+        if (initOnStart)
+        {
+            InitAnimator(fishStatus.fishId);
+        }
         BeginNewMovement();
     }
 
     public void InitAnimator(FishId fishId)
     {
-        fishParameters.animators[FishId.Carp].enabled = true;
+        fishParameters.animators[fishId].gameObject.SetActive(true);
     }
 
     private void Update()
@@ -52,7 +61,7 @@ public class Fish : Catchable
         switch (_actionType)
         {
             case ActionType.Waiting:
-                fishParameters.animators[FishId.Carp].SetBool("IsSwimming", false);
+                fishParameters.animators[fishStatus.fishId].SetBool("IsSwimming", false);
                 _timer += Time.deltaTime;
                 if (_timer >= waitTime)
                 {
@@ -61,7 +70,7 @@ public class Fish : Catchable
                 return;
             case ActionType.Moving:
                 _currentCooldown += Time.deltaTime;
-                fishParameters.animators[FishId.Carp].SetBool("IsSwimming", true);
+                fishParameters.animators[fishStatus.fishId].SetBool("IsSwimming", true);
                 _timer += Time.deltaTime;
                 float t = Mathf.Clamp01(_timer / moveDuration);
                 float curveT = speedCurve.Evaluate(t);
@@ -118,7 +127,7 @@ public class Fish : Catchable
         }
         if (baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
         {
-            fishParameters.animators[FishId.Carp].SetTrigger("OnTheHook");
+            fishParameters.animators[fishStatus.fishId].SetTrigger("OnTheHook");
             _actionType = ActionType.Hooked;
             float sign = Mathf.Sign(transform.localScale.x); 
             LeanTween.rotateZ(gameObject, 70 * -sign, 1).setDelay(0.3f);
@@ -129,7 +138,7 @@ public class Fish : Catchable
         }
         else
         {
-            fishParameters.animators[FishId.Carp].SetTrigger("Hit");
+            fishParameters.animators[fishStatus.fishId].SetTrigger("Hit");
                 _actionType = ActionType.Hitting;
             LeanTween.delayedCall(0.7f, () =>
             { 
@@ -145,7 +154,7 @@ public class Fish : Catchable
         if (_currentCooldown > _detectCooldown)
         {
             _detectedTransform = transform;
-            fishParameters.animators[FishId.Carp].SetTrigger("IsBaited");
+            fishParameters.animators[fishStatus.fishId].SetTrigger("IsBaited");
             _actionType = ActionType.Detected;
         }
     }
@@ -155,7 +164,7 @@ public class Fish : Catchable
         if (_actionType == ActionType.Detected)
         { 
             _detectedTransform = null;
-            fishParameters.animators[FishId.Carp].SetTrigger("Idle");
+            fishParameters.animators[fishStatus.fishId].SetTrigger("Idle");
             _actionType = ActionType.Waiting;
         }
     }
