@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     public PlayerActionState ActionState => _actionState;
     public static bool isAnglerCatched;
     
-
     private void Awake()
     {
         Instance = this;
@@ -41,7 +40,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-
         if (_actionState == PlayerActionState.Aiming)
         {
             Aiming();
@@ -152,6 +150,8 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case CatchableType.Fish:
+                ScoreManager.Instance.IncreaseGold((catchable as Fish).fishStatus.goldReward);
+                ScoreManager.Instance.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
