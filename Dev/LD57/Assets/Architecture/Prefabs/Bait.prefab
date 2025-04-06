@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _catchableType: 0
+  _baitId: 0
   _spriteRenderer: {fileID: 2773779743576299170}
 --- !u!61 &1365579966412638139
 BoxCollider2D:

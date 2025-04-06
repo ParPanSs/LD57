@@ -1,5 +1,7 @@
+using AYellowpaper.SerializedCollections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -10,21 +12,25 @@ public class GameManager : MonoBehaviour
     private const KeyCode CANCEL_KEY_CODE = KeyCode.Escape;
     private const KeyCode HOOK_KEY_CODE = KeyCode.E;
     private const KeyCode BAIT_KEY_CODE = KeyCode.Q;
+    private const KeyCode BOOK_KEY_CODE = KeyCode.R;
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
     [SerializeField] private float _aimingSpeed;
     [SerializeField] private HookController _hookController;
     [SerializeField] private Slider _aimingSlider;
+    [SerializeField] private GameObject _bookPlane;
     [SerializeField] private FishManager _fishManager; 
     [SerializeField] private BaitManager _baitManager;
     public BaitManager BaitManager => _baitManager;
-
-    
+    [SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
+    [SerializeField] private SerializedDictionary<CatchableObjectType, List<GameObject>> _catchedObjects;
+     
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
 
     private void Awake()
     {
+
         Instance = this;
     }
 
@@ -52,10 +58,19 @@ public class GameManager : MonoBehaviour
         {
             CatchHandle();
         }
-        if (Input.GetKeyDown(BAIT_KEY_CODE))
+        if (Input.GetKeyDown(BAIT_KEY_CODE) && IsCatchableObjectOpened(CatchableObjectType.Bucket))
         {
             BaitHandler();
         }
+        if (Input.GetKeyDown(BOOK_KEY_CODE) && IsCatchableObjectOpened(CatchableObjectType.Book))
+        {
+            BookHandler();
+        }
+    }
+
+    private bool IsCatchableObjectOpened(CatchableObjectType catchableObjectType)
+    {
+        return _catchedObjects.ContainsKey(catchableObjectType) && _catchedObjects[catchableObjectType][0].activeSelf;
     }
 
     #region Hook Methods
@@ -75,6 +90,7 @@ public class GameManager : MonoBehaviour
     {
         _aimingSlider.gameObject.SetActive(true);
         _actionState = PlayerActionState.Aiming;
+        _hints[_actionState].SetActive(false); 
         _aimingSlider.value = _aimingSlider.minValue; 
     } 
     private void Aiming()
@@ -87,6 +103,7 @@ public class GameManager : MonoBehaviour
     {
         _aimingSlider.gameObject.SetActive(false); 
         _actionState = PlayerActionState.Hooking;
+        _hints[_actionState].SetActive(false); 
         _hookController.StartHooking(_aimingSlider.value);
     }
     #endregion
@@ -124,6 +141,11 @@ public class GameManager : MonoBehaviour
             case CatchableType.Fish:
                 break;
             case CatchableType.Object:
+                var type = (catchable as CatchableObject).CatchableObjectType; 
+                foreach(var item in _catchedObjects[type])
+                {
+                    item.SetActive(true);
+                }
                 break; 
             default:
                 break;
@@ -137,6 +159,7 @@ public class GameManager : MonoBehaviour
         if(_actionState == PlayerActionState.Idle)
         {
             _actionState = PlayerActionState.SelectingBait;
+            _hints[_actionState].SetActive(false); 
             _baitManager.ToggleBaitsPanelActive(true);
         }
         else if(_actionState == PlayerActionState.SelectingBait)
@@ -154,8 +177,26 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void CancelHandle()
+    #region Book Methods
+
+    private void BookHandler()
     {
+        if (_actionState == PlayerActionState.Idle)
+        {
+            _actionState = PlayerActionState.Reading;
+            _hints[_actionState].SetActive(false);
+            _bookPlane.SetActive(true);
+        }
+        else if (_actionState == PlayerActionState.Reading)
+        {
+            _actionState = PlayerActionState.Idle;
+            _bookPlane.SetActive(false);
+        }
+    }
+    #endregion
+
+    private void CancelHandle()
+    { 
         switch (_actionState)
         {
             case PlayerActionState.Idle:
@@ -169,6 +210,9 @@ public class GameManager : MonoBehaviour
             case PlayerActionState.SelectingBait: 
                 _actionState = PlayerActionState.Idle;
                 _baitManager.ToggleBaitsPanelActive(false);
+                break;
+            case PlayerActionState.Reading:
+                _bookPlane.SetActive(false);
                 break;
             default:
                 break;
@@ -188,5 +232,6 @@ public enum PlayerActionState
     Hooking, 
     Catching,
     SelectingBait,
+    Reading,
 
 }

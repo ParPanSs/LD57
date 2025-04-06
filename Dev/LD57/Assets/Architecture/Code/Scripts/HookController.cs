@@ -1,3 +1,4 @@
+using Sirenix.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,9 +12,11 @@ public class HookController : MonoBehaviour
 
     [SerializeField] private Transform[] _startHookingAnimPos;
     [SerializeField] private SpriteRenderer _activeBait;
+    [SerializeField] private GameObject _hookingHint;
 
     private float _mainSpeed = 25;
     private float _movementSpeed = 0.6f;
+    private float _xFactor = 0f;
     private float _speed;
     private bool _isAnimated;
     private Transform _cameraTransform;
@@ -43,11 +46,17 @@ public class HookController : MonoBehaviour
         {
             vectors[i] = _startHookingAnimPos[i].position;
         }
-        LeanTween.moveSpline(gameObject, vectors, 1f).setOnComplete(() => _isAnimated = false);
+        LeanTween.moveSpline(gameObject, vectors, 1f).setOnComplete(() =>
+        {
+            _isAnimated = false;
+            _hookingHint.SetActive(true);
+        });
     }
 
     public void StartCatching()
     {
+        _hookingHint.SetActive(false);
+        _xFactor = 0;
         _isAnimated = true;
         LeanTween.moveX(gameObject, transform.position.x + 0.5f, 0.5f).setEaseShake().setOnComplete(() =>
         {
@@ -79,7 +88,10 @@ public class HookController : MonoBehaviour
             if (GameManager.Instance.ActionState == PlayerActionState.Hooking)
             {
                 Vector3 moveDirection = Vector3.down + MovementHandle();
-                _speed -= Time.deltaTime * 0.1f;
+                moveDirection.x += _xFactor;
+
+                _xFactor -= Time.deltaTime * (Mathf.Sign(_xFactor) * 0.5f);
+                _speed -= Time.deltaTime * 0.05f;
                 transform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed;
                 _cameraTransform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed;
                 if (_speed <= 0)
@@ -89,14 +101,19 @@ public class HookController : MonoBehaviour
             }
             else if (GameManager.Instance.ActionState == PlayerActionState.Catching)
             {
+                Vector3 direction = (Vector3.zero - transform.position).normalized;
+                var deepFactor = -((transform.position.y / 20));
+                deepFactor = Mathf.Max(1f, deepFactor);
+                transform.position += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
+                _cameraTransform.position += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
+                if (_cameraTransform.position.y > 0)
+                {
+                    _cameraTransform.position = Vector3.zero;
+                }
                 if (transform.position.y >= -0.5f)
                 {
                     StopCatching();
                 }
-                Vector3 direction = (Vector3.zero - transform.position).normalized;
-
-                transform.position += direction * _mainSpeed * Time.deltaTime; ;
-                _cameraTransform.position += direction * _mainSpeed * Time.deltaTime; ;
             }
 
 
@@ -123,6 +140,38 @@ public class HookController : MonoBehaviour
             _catchedObject = catchable;
             _catchedObject.transform.SetParent(transform);
             GameManager.Instance.StartCatching();
+        }
+        else if (collision.gameObject.TryGetComponent<Detectable>(out Detectable detectable))
+        {
+            OnDetected(detectable.DetectableType);
+        }
+    }
+
+    private void OnDetected(DetectableType detectableType)
+    {
+        if (GameManager.Instance.ActionState != PlayerActionState.Hooking)
+        {
+            return;
+        }
+        switch (detectableType)
+        {
+            case DetectableType.Obstacle:
+                GameManager.Instance.StartCatching();
+                break;
+            case DetectableType.Speedup:
+                _speed += 0.15f;
+                break;
+            case DetectableType.Slowdown:
+                _speed -= 0.15f;
+                break;
+            case DetectableType.MoveLeft:
+                _xFactor -= 0.6f;
+                break;
+            case DetectableType.MoveRight:
+                _xFactor += 0.6f;
+                break;
+            default:
+                break;
         }
     }
 }
