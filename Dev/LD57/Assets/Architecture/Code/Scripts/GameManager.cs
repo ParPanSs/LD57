@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Tails => tails;
     public FishManager FishManager => _fishManager;
     public BaitManager BaitManager => _baitManager;
+    public ScoreManager ScoreManager => _scoreManager;
     public float SpeedStat { get; set; }
     public float MovementStat { get; set; }
     public float HookStat { get; set; }

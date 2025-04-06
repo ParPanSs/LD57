@@ -90,10 +90,10 @@ public class HookController : MonoBehaviour
                 _speed -= Time.deltaTime * 0.05f;
 
                 var newPosition = transform.position;
-                newPosition += moveDirection * Time.deltaTime * _speed * (_mainSpeed * GameManager.Instance.SpeedStat);
+                newPosition += moveDirection * Time.deltaTime * _speed * _mainSpeed * GameManager.Instance.SpeedStat;
                 newPosition.x = Mathf.Clamp(newPosition.x, -15, 15);
                 transform.position = newPosition;
-                _cameraTransform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed;
+                _cameraTransform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed * GameManager.Instance.SpeedStat;
                 if (_speed <= 0)
                 {
                     GameManager.Instance.StartCatching();
@@ -122,11 +122,11 @@ public class HookController : MonoBehaviour
     {
         if (Input.GetKey(LEFT_KEY_CODE) || Input.GetKey(KeyCode.LeftArrow))
         {
-            return Vector3.left * (_movementSpeed * GameManager.Instance.MovementStat);
+            return Vector3.left * _movementSpeed * GameManager.Instance.MovementStat;
         }
         if (Input.GetKey(RIGHT_KEY_CODE) || Input.GetKey(KeyCode.RightArrow))
         {
-            return Vector3.right * (_movementSpeed * GameManager.Instance.MovementStat);
+            return Vector3.right * _movementSpeed * GameManager.Instance.MovementStat;
         }
         return Vector3.zero;
     }

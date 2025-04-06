@@ -12,7 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     public int Coin { get; set; }
     public int Score { get; set; }
-    
+
     public void IncreaseScore(int value)
     {
         LeanTween.scale(scoreText.gameObject,
@@ -31,15 +31,19 @@ public class ScoreManager : MonoBehaviour
             StartCoroutine(UpdateCoinCounter(Coin, value));
         });
     }
+    public void DecreaseGold(int value)
+    {
+        StartCoroutine(UpdateCoinCounter(Coin, -value));
+    }
 
     private IEnumerator UpdateCoinCounter(int coinAmount, int value)
     {
+        Coin = coinAmount + value;
         for (int i = coinAmount; i <= coinAmount + value; i++)
         {
             goldText.text = $"{i}";
             yield return new WaitForSeconds(.01f);
         }
-        Coin = coinAmount + value;
     }
     private IEnumerator UpdateScoreCounter(int amount, int value)
     {

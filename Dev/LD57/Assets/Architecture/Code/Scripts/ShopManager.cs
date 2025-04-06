@@ -23,22 +23,24 @@ public class ShopManager : MonoBehaviour
     }
 
     private void UpgradeHandle()
-    {
+    { 
         for (int i = 0; i < upgradeContainers.Count; i++)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-            {
+            { 
                 TryToUpgrade(upgradeContainers[i]);
             }
         }
     }
 
     private void TryToUpgrade(UpgradeContainer container)
-    {
+    { 
         var info = upgradeInfo.upgradeDT[container.upgradeType];
-        if(info.Count > container.CurrentLevel + 1)
+        int price = info[container.CurrentLevel + 1].price;
+        if (info.Count > container.CurrentLevel + 1 && GameManager.Instance.ScoreManager.Coin>= price)
         {
-            container.CurrentLevel += 1;
+            GameManager.Instance.ScoreManager.DecreaseGold(price);
+            container.CurrentLevel += 1; 
             UpdateInfo();
         }
     }
@@ -77,7 +79,7 @@ public class ShopManager : MonoBehaviour
 }
 
 [System.Serializable]
-public struct UpgradeContainer
+public class UpgradeContainer
 {
     public UpgradeType upgradeType;
     public TextMeshProUGUI currentStatText;
