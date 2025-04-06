@@ -6,6 +6,14 @@ public class FishDetector : MonoBehaviour
 {
     [SerializeField] private Fish _fish;
 
+    private void Start()
+    {
+        if(_fish.fishStatus.fishId == FishId.SiameseFish)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<HookController>(out HookController hook))

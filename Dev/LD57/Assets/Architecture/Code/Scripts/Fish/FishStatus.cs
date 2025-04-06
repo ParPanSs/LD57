@@ -20,7 +20,7 @@ public class FishStatus : ScriptableObject
     public bool needBait;
     [ShowIf("needBait")]
     public BaitId baitId;
-    public Vector2 spawnPosition;
+    public float maxYPos;
     public int goldReward;
     public int scoreReward;
 }

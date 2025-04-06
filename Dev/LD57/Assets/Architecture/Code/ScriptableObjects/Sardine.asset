@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d03f43a8dc4a142a78cd6d7da07df7, type: 3}
   m_Name: Sardine
   m_EditorClassIdentifier: 
-  fishId: 0
+  fishId: 2
   fishSpeed: 15
   fishAmount: 4
   needBait: 1
   baitId: 2
-  spawnPosition: {x: 0, y: 0}
+  maxYPos: -120
   goldReward: 24
   scoreReward: 0

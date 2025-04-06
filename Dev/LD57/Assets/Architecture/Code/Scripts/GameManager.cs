@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
     public static bool isAnglerCatched;
+    public static bool isEndlessMode;
     
     private void Awake()
     {

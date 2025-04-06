@@ -52,11 +52,19 @@ public class FishManager : MonoBehaviour
 
     public List<Fish> SpawnRandomFish(float minY, float maxY)
     {
-        if(GameManager.isAnglerCatched && fishes.ContainsKey(FishId.Angler))
+        Dictionary<FishId, FishStatus> fishList = new(fishes);
+        if(!GameManager.isEndlessMode)
         {
-            fishes.Remove(FishId.Angler);
+            fishList.Remove(FishId.Angler);
         }
-        var randomFishId = fishes.ElementAt(Random.Range(0, fishes.Count)); 
+        foreach (var fish in fishList.ToList())
+        {
+            if(fish.Value.maxYPos < minY)
+            {
+                fishList.Remove(fish.Key);
+            }
+        }
+        var randomFishId = fishList.ElementAt(Random.Range(0, fishList.Count)); 
         return SpawnFish(randomFishId.Key, randomFishId.Value.fishAmount,minY,maxY);
     }
 

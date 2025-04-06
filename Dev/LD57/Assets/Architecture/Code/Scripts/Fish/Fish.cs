@@ -121,11 +121,11 @@ public class Fish : Catchable
 
     public bool TryToHook(BaitId baitId)
     {
-        if(_actionType == ActionType.Hooked || _actionType == ActionType.Hitting)
+        if(_actionType == ActionType.Hooked || _actionType == ActionType.Hitting )
         {
             return false;
         }
-        if (baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
+        if (fishStatus.needBait && baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
         {
             fishParameters.animators[fishStatus.fishId].SetTrigger("OnTheHook");
             _actionType = ActionType.Hooked;

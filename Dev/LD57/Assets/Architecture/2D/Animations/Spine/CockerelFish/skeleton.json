@@ -1,14 +1,14 @@
 {
-"skeleton": {
-	"hash": "nAyfUP1x5AydWgNMhveRtjhscks",
-	"spine": "3.8.75",
-	"x": -199.02,
-	"y": 32.24,
-	"width": 474.21,
-	"height": 349.13,
-	"images": "./images/",
-	"audio": ""
-},
+	"skeleton": {
+		"hash": "nAyfUP1x5AydWgNMhveRtjhscks",
+		"spine": "3.8.33-beta",
+		"x": -199.02,
+		"y": 32.24,
+		"width": 474.21,
+		"height": 349.13,
+		"images": "./images/",
+		"audio": ""
+	},
 "bones": [
 	{ "name": "root" },
 	{ "name": "Body", "parent": "root", "length": 56.14, "rotation": -12.37, "x": -49.94, "y": 139.44 },
