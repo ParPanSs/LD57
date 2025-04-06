@@ -23,16 +23,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _bookPlane;
     [SerializeField] private FishManager _fishManager; 
     [SerializeField] private BaitManager _baitManager;
+    [SerializeField] private List<GameObject> tails;
+    public List<GameObject> Tails => tails;
+    
     public BaitManager BaitManager => _baitManager;
     [SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
     [SerializeField] private SerializedDictionary<CatchableObjectType, List<GameObject>> _catchedObjects;
      
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
+    public static bool isAnglerCatched;
+    
 
     private void Awake()
     {
-
         Instance = this;
     }
 
@@ -228,10 +232,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [Button("SpawnFish")]
-    private void SpawnFish()
+    public void SpawnFish()
     {
         _fishManager.SpawnRandomFish();
+    }
+    
+    [Button("SpawnSardine")]
+    public void SpawnSardine()
+    {
+        _fishManager.SpawnFish(FishId.Sardine, 3);
     }
 }
 public enum PlayerActionState
