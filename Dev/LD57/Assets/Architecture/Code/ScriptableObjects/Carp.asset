@@ -19,4 +19,4 @@ MonoBehaviour:
   baitId: 1
   spawnPosition: {x: 0, y: 0}
   goldReward: 24
-  scoreReward: 0
+  scoreReward: 525
