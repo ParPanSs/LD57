@@ -1,0 +1,34 @@
+
+skeleton.png
+size: 1826,793
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Algae2
+  rotate: true
+  xy: 1155, 364
+  size: 427, 669
+  orig: 1024, 1024
+  offset: 560, 142
+  index: -1
+Algae3
+  rotate: false
+  xy: 2, 18
+  size: 735, 773
+  orig: 1024, 1024
+  offset: 36, 18
+  index: -1
+Algae4
+  rotate: true
+  xy: 1155, 5
+  size: 357, 246
+  orig: 1024, 1024
+  offset: 585, 123
+  index: -1
+AlgaeOne
+  rotate: false
+  xy: 739, 2
+  size: 414, 789
+  orig: 1024, 1024
+  offset: 226, 190
+  index: -1
