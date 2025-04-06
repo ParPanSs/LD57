@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: skeleton_Atlas
   m_EditorClassIdentifier: 
-  textureLoadingMode: 0
-  onDemandTextureLoader: {fileID: 0}
-  atlasFile: {fileID: 4900000, guid: 3dd9a2a12756bf04ba6636035aba803d, type: 3}
+  atlasFile: {fileID: 4900000, guid: fc5440e75b3c4e943b5a58d761ae1b4d, type: 3}
   materials:
-  - {fileID: 2100000, guid: fe910621b6899b043af667e9b2fd4c6a, type: 2}
+  - {fileID: 2100000, guid: 98952503c615f5e4d82d2f8f4ff4cdbd, type: 2}
