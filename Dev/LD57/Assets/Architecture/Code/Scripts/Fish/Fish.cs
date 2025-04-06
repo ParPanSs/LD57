@@ -39,14 +39,14 @@ public class Fish : Catchable
 
     public void InitAnimator(FishId fishId)
     {
-        fishParameters.animators[fishId].enabled = true;
+        fishParameters.animators[FishId.Carp].enabled = true;
     }
 
     private void Update()
     {
         if (_isWaiting)
         {
-            fishParameters.animators[fishStatus.fishId].SetBool("isSwimming", false);
+            fishParameters.animators[FishId.Carp].SetBool("isSwimming", false);
             _timer += Time.deltaTime;
             if (_timer >= waitTime)
             {
@@ -58,7 +58,7 @@ public class Fish : Catchable
 
         if (_isMoving)
         {
-            fishParameters.animators[fishStatus.fishId].SetBool("isSwimming", true);
+            fishParameters.animators[FishId.Carp].SetBool("isSwimming", true);
             _timer += Time.deltaTime;
             float t = Mathf.Clamp01(_timer / moveDuration);
             float curveT = speedCurve.Evaluate(t);
@@ -96,7 +96,7 @@ public class Fish : Catchable
     {
         if (other.TryGetComponent(out HookController hookController))
         {
-            fishParameters.animators[fishStatus.fishId].SetBool("OnTheHook", true);
+            fishParameters.animators[FishId.Carp].SetBool("OnTheHook", true);
         }
     }
 }

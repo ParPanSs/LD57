@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (_timer >= 2)
+        if (_timer >= 5)
         {
             _timer = 0;
             SpawnFish();

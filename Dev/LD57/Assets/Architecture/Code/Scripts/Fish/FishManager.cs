@@ -25,8 +25,7 @@ public class FishManager : MonoBehaviour
     {
         for (int i = 0; i < value; i++)
         {
-            var spawnedFish = Instantiate(fishPrefab, new Vector2(Random.Range(_mainCamera.WorldToViewportPoint(Vector2(0f, 0f, 0f)), 
-                _mainCamera.transform.position.y - 15), Quaternion.identity);
+            var spawnedFish = Instantiate(fishPrefab, new Vector2(Random.Range(-15, 15), _mainCamera.transform.position.y - 25), Quaternion.identity);
             fish = spawnedFish.GetComponent<Fish>();
             fish.fishStatus = fishes[fishId];
             fish.InitAnimator(fishId);
