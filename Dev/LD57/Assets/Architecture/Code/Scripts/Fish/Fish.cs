@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 [System.Serializable]
 public struct FishParameters
 {
-    public List<Animator> animators;
+    public SerializedDictionary<FishId, Animator> animators;
 }
 
 public class Fish : MonoBehaviour
@@ -13,7 +14,7 @@ public class Fish : MonoBehaviour
     [SerializeField] private float waitTime;
     [SerializeField] private float moveDuration;
     [SerializeField] private AnimationCurve speedCurve;
-    [SerializeField] private FishParameters parameters;
+    [SerializeField] private FishParameters fishParameters;
     
     private Collider2D _collider;
     private Vector2 _startPosition;
@@ -34,6 +35,11 @@ public class Fish : MonoBehaviour
     {
         _startPosition = transform.position;
         BeginNewMovement();
+    }
+
+    public void InitAnimator(FishId fishId)
+    {
+        fishParameters.animators[fishId].enabled = true;
     }
 
     private void Update()

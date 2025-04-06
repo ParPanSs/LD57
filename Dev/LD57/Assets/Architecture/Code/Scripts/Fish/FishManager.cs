@@ -1,10 +1,13 @@
+using System.Collections.Generic;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
+
 public class FishManager : MonoBehaviour
 {
     [SerializeField] private SerializedDictionary<FishId, FishStatus> fishes = new();
+    
     [SerializeField] private GameObject fishPrefab;
     private Fish fish;
 
@@ -23,6 +26,7 @@ public class FishManager : MonoBehaviour
             var spawnedFish = Instantiate(fishPrefab, transform.position, Quaternion.identity);
             fish = spawnedFish.GetComponent<Fish>();
             fish.fishStatus = fishes[fishId];
+            fish.InitAnimator(fishId);
         }
     }
 

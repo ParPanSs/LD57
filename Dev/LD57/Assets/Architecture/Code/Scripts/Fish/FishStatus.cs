@@ -19,4 +19,6 @@ public class FishStatus : ScriptableObject
     public bool needBait;
     [ShowIf("needBait")]
     public BaitId baitId;
+
+    public int reward;
 }
