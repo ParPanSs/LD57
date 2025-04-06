@@ -106,9 +106,28 @@ public class GameManager : MonoBehaviour
         _hookController.StartCatching();
     }
 
-    public void StopCatching()
+    public void StopCatching(Catchable catchable)
     {
         _actionState = PlayerActionState.Idle;
+        CheckCatched(catchable);
+    }
+
+    private void CheckCatched(Catchable catchable)
+    {
+        if (catchable == null)
+            return;
+        switch (catchable.CatchableType)
+        {
+            case CatchableType.Bait:
+                BaitManager.InitizlizeBait((catchable as Bait).BaitId);
+                break;
+            case CatchableType.Fish:
+                break;
+            case CatchableType.Object:
+                break; 
+            default:
+                break;
+        }
     }
     #endregion
 
@@ -134,6 +153,7 @@ public class GameManager : MonoBehaviour
         _hookController.SetBait(baitId);
     }
     #endregion
+
     private void CancelHandle()
     {
         switch (_actionState)

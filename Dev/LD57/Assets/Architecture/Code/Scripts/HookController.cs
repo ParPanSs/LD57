@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class HookController : MonoBehaviour
 {
-    private const KeyCode LEFT_KEY_CODE = KeyCode.A; 
-    private const KeyCode RIGHT_KEY_CODE = KeyCode.D; 
+    private const KeyCode LEFT_KEY_CODE = KeyCode.A;
+    private const KeyCode RIGHT_KEY_CODE = KeyCode.D;
 
     [SerializeField] private Transform[] _startHookingAnimPos;
     [SerializeField] private SpriteRenderer _activeBait;
@@ -17,7 +17,7 @@ public class HookController : MonoBehaviour
     private float _speed;
     private bool _isAnimated;
     private Transform _cameraTransform;
-
+    private Catchable _catchedObject;
     private BaitId _baitId;
     public BaitId BaitId => _baitId;
 
@@ -57,7 +57,12 @@ public class HookController : MonoBehaviour
 
     private void StopCatching()
     {
-        GameManager.Instance.StopCatching();
+        GameManager.Instance.StopCatching(_catchedObject);
+        if (_catchedObject != null)
+        {
+            Destroy(_catchedObject.gameObject);
+            _catchedObject = null;
+        }
         Vector3[] vectors = new Vector3[_startHookingAnimPos.Length];
         for (int i = 0; i < _startHookingAnimPos.Length; i++)
         {
@@ -109,5 +114,15 @@ public class HookController : MonoBehaviour
             return Vector3.right * _movementSpeed;
         }
         return Vector3.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (_catchedObject == null && collision.gameObject.TryGetComponent<Catchable>(out Catchable catchable))
+        {
+            _catchedObject = catchable;
+            _catchedObject.transform.SetParent(transform);
+            GameManager.Instance.StartCatching();
+        }
     }
 }
