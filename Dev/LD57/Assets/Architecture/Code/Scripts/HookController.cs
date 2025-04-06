@@ -58,7 +58,7 @@ public class HookController : MonoBehaviour
         _hookingHint.SetActive(false);
         _xFactor = 0;
         _isAnimated = true;
-        LeanTween.moveX(gameObject, transform.position.x + 0.5f, 0.5f).setEaseShake().setOnComplete(() =>
+        LeanTween.moveX(gameObject, transform.position.x + 0.5f, 0.3f).setEaseShake().setOnComplete(() =>
         {
             _isAnimated = false;
         });
@@ -141,9 +141,21 @@ public class HookController : MonoBehaviour
     {
         if (_catchedObject == null && collision.gameObject.TryGetComponent<Catchable>(out Catchable catchable))
         {
-            _catchedObject = catchable;
-            _catchedObject.transform.SetParent(transform);
-            GameManager.Instance.StartCatching();
+            bool canCatch = true;
+            Vector3 pos = Vector3.zero;
+            if (catchable.CatchableType == CatchableType.Fish)
+            {
+                canCatch = (catchable as Fish).TryToHook(_baitId);
+                float sign = Mathf.Sign(catchable.transform.localScale.x);
+                pos.y = 2*sign;
+            }
+            if (canCatch)
+            {
+                _catchedObject = catchable;
+                _catchedObject.transform.SetParent(transform);
+                _catchedObject.transform.localPosition = Vector3.zero;
+            }
+                GameManager.Instance.StartCatching(); 
         }
         else if (collision.gameObject.TryGetComponent<Detectable>(out Detectable detectable))
         {

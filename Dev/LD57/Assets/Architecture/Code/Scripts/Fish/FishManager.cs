@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class FishManager : MonoBehaviour
 {
+    public static FishManager Instance;
     [SerializeField] private SerializedDictionary<FishId, FishStatus> fishes = new();
     
     [SerializeField] private GameObject fishPrefab;
     private Fish fish;
-
-    public static FishManager Instance;
+    private float _timer=5;
     private Camera _mainCamera;
     
     private void Awake()
@@ -19,6 +19,16 @@ public class FishManager : MonoBehaviour
         Instance = this;
         if (Instance == null) Destroy(gameObject);
         _mainCamera = Camera.main;
+    }
+
+    private void Update()
+    { 
+        if (_timer >= 5)
+        {
+            _timer = 0;
+            SpawnRandomFish();
+        }
+        _timer += Time.deltaTime;
     }
 
     private void SpawnFish(FishId fishId, int value)
