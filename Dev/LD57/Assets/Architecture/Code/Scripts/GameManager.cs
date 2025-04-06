@@ -29,7 +29,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Tails => tails;
     public FishManager FishManager => _fishManager;
     public BaitManager BaitManager => _baitManager;
-    
+    public int SpeedStat { get; set; }
+    public int MovementStat { get; set; }
+    public int HookStat { get; set; }
 
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
@@ -246,5 +248,6 @@ public enum PlayerActionState
     Catching,
     SelectingBait,
     Reading,
+    Shop,
 
 }

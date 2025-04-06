@@ -6,13 +6,13 @@ using UnityEngine;
 [CreateAssetMenu]
 public class UpgradeInfo : ScriptableObject
 {
-    public SerializedDictionary<UpgradeType, List<UpgradeInfoContainer>> upgradeInfo;
+    public SerializedDictionary<UpgradeType, List<UpgradeInfoContainer>> upgradeDT;
 
 
     [System.Serializable]
     public struct UpgradeInfoContainer
     {
-        public int nextStat;
+        public int currentStat;
         public int price;
     }
 }
