@@ -146,6 +146,10 @@ public class GameManager : MonoBehaviour
         {
             case CatchableType.Bait:
                 BaitManager.InitizlizeBait((catchable as Bait).BaitId);
+                if (IsCatchableObjectOpened(CatchableObjectType.Bucket))
+                {
+                    _catchedObjects[CatchableObjectType.Bucket][1].SetActive(true); 
+                }
                 break;
             case CatchableType.Fish:
                 break;
