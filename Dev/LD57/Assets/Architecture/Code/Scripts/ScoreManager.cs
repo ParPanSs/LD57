@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
-
     [SerializeField] private TextMeshProUGUI goldText;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject coinImage;
@@ -14,16 +12,7 @@ public class ScoreManager : MonoBehaviour
 
     public int Coin { get; set; }
     public int Score { get; set; }
-
-    private void Awake()
-    {
-        Instance = this;
-        if (Instance == null)
-        {
-            Destroy(gameObject);
-        }
-    }
-
+    
     public void IncreaseScore(int value)
     {
         LeanTween.scale(scoreText.gameObject,
