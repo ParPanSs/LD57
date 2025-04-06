@@ -8,7 +8,7 @@ public struct FishParameters
     public SerializedDictionary<FishId, Animator> animators;
 }
 
-public class Fish : MonoBehaviour
+public class Fish : Catchable
 {
     [SerializeField] private float wanderRadius;
     [SerializeField] private float waitTime;
@@ -46,6 +46,7 @@ public class Fish : MonoBehaviour
     {
         if (_isWaiting)
         {
+            fishParameters.animators[fishStatus.fishId].SetBool("isSwimming", false);
             _timer += Time.deltaTime;
             if (_timer >= waitTime)
             {
@@ -57,6 +58,7 @@ public class Fish : MonoBehaviour
 
         if (_isMoving)
         {
+            fishParameters.animators[fishStatus.fishId].SetBool("isSwimming", true);
             _timer += Time.deltaTime;
             float t = Mathf.Clamp01(_timer / moveDuration);
             float curveT = speedCurve.Evaluate(t);
@@ -88,5 +90,13 @@ public class Fish : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(Application.isPlaying ? _startPosition : transform.position, wanderRadius);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out HookController hookController))
+        {
+            fishParameters.animators[fishStatus.fishId].SetBool("OnTheHook", true);
+        }
     }
 }

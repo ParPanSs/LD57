@@ -19,7 +19,7 @@ public class FishManager : MonoBehaviour
         if (Instance == null) Destroy(gameObject);
     }
 
-    public void SpawnFish(FishId fishId, int value)
+    private void SpawnFish(FishId fishId, int value)
     {
         for (int i = 0; i < value; i++)
         {
