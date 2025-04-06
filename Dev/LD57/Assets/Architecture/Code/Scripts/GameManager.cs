@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour
     private const KeyCode HOOK_KEY_CODE = KeyCode.E;
     private const KeyCode BAIT_KEY_CODE = KeyCode.Q;
     private const KeyCode BOOK_KEY_CODE = KeyCode.R;
+    private const KeyCode SHOP_KEY_CODE = KeyCode.T;
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
     [SerializeField] private float _aimingSpeed;
     [SerializeField] private HookController _hookController;
     [SerializeField] private Slider _aimingSlider;
     [SerializeField] private GameObject _bookPlane;
+    [SerializeField] private GameObject _shopPlane;
     [SerializeField] private FishManager _fishManager;
     [SerializeField] private BaitManager _baitManager;
     [SerializeField] private ScoreManager _scoreManager;
@@ -29,9 +31,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Tails => tails;
     public FishManager FishManager => _fishManager;
     public BaitManager BaitManager => _baitManager;
-    public int SpeedStat { get; set; }
-    public int MovementStat { get; set; }
-    public int HookStat { get; set; }
+    public float SpeedStat { get; set; }
+    public float MovementStat { get; set; }
+    public float HookStat { get; set; }
 
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
@@ -74,6 +76,10 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(BOOK_KEY_CODE) && IsCatchableObjectOpened(CatchableObjectType.Book))
         {
             BookHandler();
+        }
+        if (Input.GetKeyDown(SHOP_KEY_CODE) && IsCatchableObjectOpened(CatchableObjectType.Shop))
+        {
+            ShopHandler();
         }
     }
 
@@ -214,6 +220,24 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Shop Methods
+
+    private void ShopHandler()
+    {
+        if (_actionState == PlayerActionState.Idle)
+        {
+            _actionState = PlayerActionState.Shop;
+            _hints[_actionState].SetActive(false);
+            _shopPlane.SetActive(true);
+        }
+        else if (_actionState == PlayerActionState.Shop)
+        {
+            _actionState = PlayerActionState.Idle;
+            _shopPlane.SetActive(false);
+        }
+    }
+    #endregion
+
     private void CancelHandle()
     {
         switch (_actionState)
@@ -231,7 +255,12 @@ public class GameManager : MonoBehaviour
                 _baitManager.ToggleBaitsPanelActive(false);
                 break;
             case PlayerActionState.Reading:
+                _actionState = PlayerActionState.Idle;
                 _bookPlane.SetActive(false);
+                break;
+            case PlayerActionState.Shop:
+                _actionState = PlayerActionState.Idle;
+                _shopPlane.SetActive(false);
                 break;
             default:
                 break;

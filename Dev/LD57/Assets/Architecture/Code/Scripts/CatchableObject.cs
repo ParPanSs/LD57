@@ -12,4 +12,5 @@ public enum CatchableObjectType
     Book,
     Bucket,
     Garbage,
+    Shop
 }

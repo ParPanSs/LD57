@@ -90,7 +90,7 @@ public class HookController : MonoBehaviour
                 _speed -= Time.deltaTime * 0.05f;
 
                 var newPosition = transform.position;
-                newPosition += moveDirection * Time.deltaTime * _speed * _mainSpeed;
+                newPosition += moveDirection * Time.deltaTime * _speed * (_mainSpeed * GameManager.Instance.SpeedStat);
                 newPosition.x = Mathf.Clamp(newPosition.x, -15, 15);
                 transform.position = newPosition;
                 _cameraTransform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed;
@@ -122,11 +122,11 @@ public class HookController : MonoBehaviour
     {
         if (Input.GetKey(LEFT_KEY_CODE) || Input.GetKey(KeyCode.LeftArrow))
         {
-            return Vector3.left * _movementSpeed;
+            return Vector3.left * (_movementSpeed * GameManager.Instance.MovementStat);
         }
         if (Input.GetKey(RIGHT_KEY_CODE) || Input.GetKey(KeyCode.RightArrow))
         {
-            return Vector3.right * _movementSpeed;
+            return Vector3.right * (_movementSpeed * GameManager.Instance.MovementStat);
         }
         return Vector3.zero;
     }
@@ -142,7 +142,7 @@ public class HookController : MonoBehaviour
             {
                 canCatch = (catchable as Fish).TryToHook(_baitId);
                 float sign = Mathf.Sign(catchable.transform.localScale.x);
-                pos.x = 2*sign; 
+                pos.x = 2 * sign;
             }
             if (canCatch)
             {
@@ -150,7 +150,7 @@ public class HookController : MonoBehaviour
                 _catchedObject.transform.SetParent(transform);
                 _catchedObject.transform.localPosition = pos;
             }
-                GameManager.Instance.StartCatching(); 
+            GameManager.Instance.StartCatching();
         }
         else if (collision.gameObject.TryGetComponent<Detectable>(out Detectable detectable))
         {

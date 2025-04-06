@@ -12,7 +12,7 @@ public class UpgradeInfo : ScriptableObject
     [System.Serializable]
     public struct UpgradeInfoContainer
     {
-        public int currentStat;
+        public float currentStat;
         public int price;
     }
 }
