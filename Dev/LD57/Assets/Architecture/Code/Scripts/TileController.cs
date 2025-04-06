@@ -15,7 +15,7 @@ public class TileController : MonoBehaviour
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (_timer >= 10)
+        if (_timer >= 60)
         {
             _timer = 0;
             Spawn();

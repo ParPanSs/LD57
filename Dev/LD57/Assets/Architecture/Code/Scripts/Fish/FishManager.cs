@@ -18,16 +18,7 @@ public class FishManager : MonoBehaviour
     private void Awake()
     {
         _mainCamera = Camera.main;
-    }
-    private void Update()
-    {
-        /* if (_timer >= 5)
-         {
-             _timer = 0;
-             SpawnRandomFish();
-         }
-         _timer += Time.deltaTime;*/
-    }
+    } 
 
     public List<Fish> SpawnFish(FishId fishId, int value, float minY, float maxY)
     {
