@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private const KeyCode BOOK_KEY_CODE = KeyCode.R;
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
+    private float _timer;
+
     [SerializeField] private float _aimingSpeed;
     [SerializeField] private HookController _hookController;
     [SerializeField] private Slider _aimingSlider;
@@ -30,12 +32,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
         Instance = this;
     }
 
     private void Update()
     {
+        if (_timer >= 2)
+        {
+            _timer = 0;
+            SpawnFish();
+        }
+        _timer += Time.deltaTime;
+        
         if(_actionState == PlayerActionState.Aiming)
         {
             Aiming();
