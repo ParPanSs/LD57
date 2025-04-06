@@ -1,62 +1,55 @@
 
 skeleton.png
-size: 761,305
+size: 571,334
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Body
   rotate: false
-  xy: 2, 5
-  size: 503, 298
+  xy: 2, 2
+  size: 475, 330
   orig: 512, 512
-  offset: 7, 137
+  offset: 16, 142
   index: -1
-Hearth
-  rotate: false
-  xy: 625, 81
-  size: 114, 79
-  orig: 128, 128
-  offset: 5, 27
-  index: -1
-LeftHand
+Brow
   rotate: true
-  xy: 574, 23
-  size: 51, 90
-  orig: 64, 128
-  offset: 7, 18
+  xy: 479, 53
+  size: 79, 50
+  orig: 128, 64
+  offset: 23, 8
   index: -1
-Month
+Eggs
   rotate: false
-  xy: 666, 31
-  size: 93, 48
-  orig: 124, 124
-  offset: 15, 38
+  xy: 479, 134
+  size: 56, 73
+  orig: 64, 128
+  offset: 3, 28
+  index: -1
+Hand right
+  rotate: true
+  xy: 479, 209
+  size: 123, 90
+  orig: 128, 128
+  offset: 2, 19
+  index: -1
+Hands
+  rotate: true
+  xy: 531, 56
+  size: 76, 38
+  orig: 256, 128
+  offset: 148, 57
+  index: -1
+Open mounth
+  rotate: false
+  xy: 479, 11
+  size: 68, 40
+  orig: 128, 64
+  offset: 29, 13
   index: -1
 Puppil
-  rotate: true
-  xy: 507, 10
-  size: 64, 65
-  orig: 64, 65
+  rotate: false
+  xy: 537, 175
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: -1
-RightHand
-  rotate: true
-  xy: 625, 162
-  size: 141, 113
-  orig: 256, 128
-  offset: 54, 8
-  index: -1
-Stomach
-  rotate: false
-  xy: 666, 2
-  size: 58, 27
-  orig: 128, 32
-  offset: 62, 3
-  index: -1
-Tie
-  rotate: false
-  xy: 507, 76
-  size: 116, 227
-  orig: 128, 256
-  offset: 5, 15
   index: -1
