@@ -1,0 +1,41 @@
+
+skeleton.png
+size: 629,368
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 2, 2
+  size: 495, 364
+  orig: 512, 512
+  offset: 9, 82
+  index: -1
+Left hand
+  rotate: false
+  xy: 499, 120
+  size: 59, 91
+  orig: 128, 128
+  offset: 62, 3
+  index: -1
+OpenMonth
+  rotate: false
+  xy: 560, 132
+  size: 64, 79
+  orig: 64, 128
+  offset: 0, 25
+  index: -1
+Puppil
+  rotate: false
+  xy: 499, 86
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Right hand
+  rotate: true
+  xy: 499, 213
+  size: 153, 128
+  orig: 256, 128
+  offset: 55, 0
+  index: -1
