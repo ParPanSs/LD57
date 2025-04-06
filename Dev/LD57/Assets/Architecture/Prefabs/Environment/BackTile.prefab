@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2272873458877854485}
   - component: {fileID: 1936577578304302299}
+  - component: {fileID: 6464345552852021156}
   m_Layer: 0
   m_Name: BackTile
   m_TagString: Tile
@@ -102,6 +103,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 44.008343, y: 103.55258}
   m_EdgeRadius: 0
+--- !u!114 &6464345552852021156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637723300465917007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719d8979ba78c674a897bf49e6fd2640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1885570267330428009
 GameObject:
   m_ObjectHideFlags: 0
