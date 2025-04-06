@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _bookPlane;
     [SerializeField] private FishManager _fishManager;
     [SerializeField] private BaitManager _baitManager;
+    [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private RoundManager _roundManager;
     [SerializeField] private List<GameObject> tails;
     [SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
     [SerializeField] private SerializedDictionary<CatchableObjectType, List<GameObject>> _catchedObjects;
@@ -151,8 +153,9 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case CatchableType.Fish:
-                ScoreManager.Instance.IncreaseGold((catchable as Fish).fishStatus.goldReward);
-                ScoreManager.Instance.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
+                _roundManager.CheckFish((catchable as Fish).fishStatus.fishId);
+                _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
+                _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
