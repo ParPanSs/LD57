@@ -33,6 +33,11 @@ public class HookController : MonoBehaviour
         _activeBait.sprite = GameManager.Instance.BaitManager.GetBaitSprite(baitId);
     }
 
+    public bool IsCatched()
+    {
+        return _catchedObject != null;
+    }
+
     public void StartHooking(float speed)
     {
         _isAnimated = true;
@@ -138,16 +143,18 @@ public class HookController : MonoBehaviour
             bool canCatch = true;
             Vector3 pos = Vector3.zero;
             _shakingTime = catchable.ShakingTime;
+            Transform parent = transform;
             if (catchable.CatchableType == CatchableType.Fish)
             {
                 canCatch = (catchable as Fish).TryToHook(_baitId);
                 float sign = Mathf.Sign(catchable.transform.localScale.x);
-                pos.x = 2 * sign;
-            }
+                //pos.x = 2 * sign;
+            } 
+                parent = _activeBait.transform;
             if (canCatch)
             {
                 _catchedObject = catchable;
-                _catchedObject.transform.SetParent(_activeBait.transform);
+                _catchedObject.transform.SetParent(parent);
                 _catchedObject.transform.localPosition = pos;
             }
             GameManager.Instance.StartCatching();

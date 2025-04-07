@@ -18,7 +18,7 @@ public class FishDetector : MonoBehaviour
     {
         if(collision.TryGetComponent<HookController>(out HookController hook))
         {
-            _fish.DetectHook(hook.transform);
+            _fish.DetectHook(hook);
         }
     }
 

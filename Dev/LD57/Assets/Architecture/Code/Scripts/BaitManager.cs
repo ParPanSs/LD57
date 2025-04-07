@@ -9,9 +9,10 @@ public class BaitManager : MonoBehaviour
 {
     [SerializeField] private SerializedDictionary<BaitId, Sprite> _baitSpriteDT;
 
-    [SerializeField] private GameObject _baitSelectionPrefab; 
-    [SerializeField] private GameObject _baitsPanel; 
+    [SerializeField] private GameObject _baitSelectionPrefab;
+    [SerializeField] private GameObject _baitsPanel;
     [SerializeField] private List<BaitId> _defaultBaits;
+    [SerializeField] private SerializedDictionary<BaitId, List<GameObject>> _objectsForAvailableBaits = new();
 
     private List<BaitId> _availableBaits = new();
 
@@ -28,6 +29,13 @@ public class BaitManager : MonoBehaviour
     {
         var bait = Instantiate(_baitSelectionPrefab, _baitsPanel.transform);
         _availableBaits.Add(baitId);
+        if (_objectsForAvailableBaits.ContainsKey(baitId))
+        {
+            foreach (var item in _objectsForAvailableBaits[baitId])
+            {
+                item.gameObject.SetActive(true);
+            }
+        }
         bait.GetComponent<Image>().sprite = GetBaitSprite(baitId);
         bait.GetComponentInChildren<TextMeshProUGUI>().text = _availableBaits.Count.ToString();
     }
@@ -44,9 +52,9 @@ public class BaitManager : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.Instance.ActionState == PlayerActionState.SelectingBait)
+        if (GameManager.Instance.ActionState == PlayerActionState.SelectingBait)
         {
-            SelectBaitHandle(); 
+            SelectBaitHandle();
         }
     }
 
@@ -70,7 +78,7 @@ public class BaitManager : MonoBehaviour
         }
     }
 }
- 
+
 public enum BaitId
 {
     Meat,
