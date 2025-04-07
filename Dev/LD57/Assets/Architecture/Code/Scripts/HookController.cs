@@ -47,11 +47,11 @@ public class HookController : MonoBehaviour
         {
             vectors[i] = _startHookingAnimPos[i].position;
         }
-       /* LeanTween.moveSpline(gameObject, vectors, 1f).setOnComplete(() =>
-        {*/
+       //  LeanTween.moveSpline(gameObject, vectors, 1f).setOnComplete(() =>
+        { 
             _isAnimated = false;
             _hookingHint.SetActive(true);
-       // });
+         }//);
     }
 
     public void StartCatching()
@@ -59,10 +59,10 @@ public class HookController : MonoBehaviour
         _hookingHint.SetActive(false);
         _xFactor = 0;
         _isAnimated = true;
-      //  LeanTween.moveX(gameObject, transform.position.x + 0.5f, _shakingTime).setEaseShake().setOnComplete(() =>
-     //   {
+          LeanTween.moveX(gameObject, transform.position.x + 0.5f, _shakingTime).setEaseShake().setOnComplete(() =>
+         {
             _isAnimated = false;
-      //  });
+         });
     }
 
     private void StopCatching()
@@ -79,7 +79,7 @@ public class HookController : MonoBehaviour
             vectors[i] = _startHookingAnimPos[_startHookingAnimPos.Length - (i + 1)].position;
 
         }
-        LeanTween.moveSpline(gameObject, vectors, 0.8f);
+       // LeanTween.moveSpline(gameObject, vectors, 0.8f);
     }
 
     private void Update()
@@ -115,10 +115,10 @@ public class HookController : MonoBehaviour
                 {
                     _cameraTransform.position = Vector3.zero;
                 }
-                /*if (transform.position.y >= -0.5f)
+                  if (transform.position.y >= -0.5f)
                 {
                     StopCatching();
-                }*/
+                } 
             }
         }
     }

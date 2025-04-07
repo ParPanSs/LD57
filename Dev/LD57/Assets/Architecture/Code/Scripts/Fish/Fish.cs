@@ -131,7 +131,7 @@ public class Fish : Catchable
             _actionType = ActionType.Hooked;
             float sign = Mathf.Sign(transform.localScale.x); 
             LeanTween.rotateZ(gameObject, 70 * -sign, 1).setDelay(0.3f);
-            Vector3 newPos = new Vector3(1.5f * sign, 0, 0);
+            Vector3 newPos = new Vector3(0, 0, 0);
             LeanTween.moveLocal(gameObject, newPos, 1).setDelay(0.3f);
             OnCatch.Invoke();
             return true;
