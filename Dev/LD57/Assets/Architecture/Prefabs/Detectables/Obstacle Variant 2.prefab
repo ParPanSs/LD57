@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4966489078151020630, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
       propertyPath: m_Name
-      value: Obstacle Variant
+      value: Obstacle Variant 2
       objectReference: {fileID: 0}
     - target: {fileID: 5582219369376804885, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
       propertyPath: m_LocalScale.x
@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 8554766275851048549, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8e9071dd6b5e76d43854d6614f2cb2ee, type: 3}
+      objectReference: {fileID: 21300000, guid: 1fec9c1b644b9bb4c8c7dbe26b8c95e0, type: 3}
     - target: {fileID: 8554766275851048549, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -99,14 +99,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4966489078151020630, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6622973991213888223}
+      addedObject: {fileID: 8040654708250509394}
   m_SourcePrefab: {fileID: 100100000, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
 --- !u!1 &8112470370826481182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4966489078151020630, guid: 16e4ea307105d80479fef439cbae4546, type: 3}
   m_PrefabInstance: {fileID: 3781276918623694408}
   m_PrefabAsset: {fileID: 0}
---- !u!60 &6622973991213888223
+--- !u!60 &8040654708250509394
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,12 +150,20 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -6.9423933, y: 1.6301836}
-      - {x: -7.2882214, y: 0.7998929}
-      - {x: -4.6894007, y: -2.572093}
-      - {x: -2.1113596, y: -4.5447516}
-      - {x: 6.5403705, y: -0.8397418}
-      - {x: 7.685216, y: 1.3724444}
-      - {x: 6.4200716, y: 2.1525054}
+    - - {x: -0.24970284, y: 5.136338}
+      - {x: 0.4720549, y: 6.354579}
+      - {x: -0.471905, y: 7.046283}
+      - {x: -2.6617122, y: 6.768217}
+      - {x: -5.218353, y: 5.2372656}
+      - {x: -7.250207, y: 2.05141}
+      - {x: -7.6635303, y: -2.1994045}
+      - {x: -6.1967897, y: -5.2306957}
+      - {x: -3.139295, y: -6.4203486}
+      - {x: 4.372738, y: -6.2898345}
+      - {x: 7.111199, y: -5.098649}
+      - {x: 7.7557974, y: -3.6476383}
+      - {x: 6.40981, y: -2.3747253}
+      - {x: -2.7745376, y: -3.3750005}
+      - {x: -4.892661, y: -0.40526724}
+      - {x: -4.505345, y: 2.3441076}
   m_UseDelaunayMesh: 0
