@@ -220,7 +220,7 @@ public class GameManager : MonoBehaviour
         var caughtObject = _hookController.GetCatchedObject() as Fish;
         if (caughtObject)
         {
-            if (!_roundManager.RightFish(caughtObject.fishStatus.fishId)) Lose();
+            if (isEndlessMode && !_roundManager.RightFish(caughtObject.fishStatus.fishId)) Lose();
         }
     }
 

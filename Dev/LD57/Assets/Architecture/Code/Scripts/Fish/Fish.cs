@@ -30,6 +30,7 @@ public class Fish : Catchable
     public FishStatus fishStatus;
     
     private Quaternion _targetRotation;
+    private Quaternion _startRotation;
     private float _rotationDuration = 0.5f;
     private float _rotationTimer = 0f;
     private bool _isRotating = false;
@@ -49,6 +50,7 @@ public class Fish : Catchable
     {
         _actionType = ActionType.Waiting;
         _startPosition = transform.position;
+        _startRotation = transform.rotation;
         _startScale = transform.localScale;
         if (initOnStart)
         {
@@ -175,6 +177,7 @@ public class Fish : Catchable
         }
         if (fishStatus.needBait && baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
         {
+            transform.rotation = _startRotation;
             fishParameters.animators[fishStatus.fishId].SetTrigger("OnTheHook");
             _actionType = ActionType.Hooked;
             float sign = Mathf.Sign(transform.localScale.x); 
