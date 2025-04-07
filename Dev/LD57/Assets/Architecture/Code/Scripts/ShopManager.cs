@@ -6,6 +6,8 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private UpgradeInfo upgradeInfo;
+    [SerializeField] private Animator _merchantAnimator;
+
     [SerializeField] private List<UpgradeContainer> upgradeContainers;
 
     private void Start()
@@ -37,8 +39,9 @@ public class ShopManager : MonoBehaviour
     { 
         var info = upgradeInfo.upgradeDT[container.upgradeType];
         int price = info[container.CurrentLevel + 1].price;
-        if (info.Count > container.CurrentLevel + 1 && GameManager.Instance.ScoreManager.Coin>= price)
+        if (info.Count > container.CurrentLevel + 1 /*&& GameManager.Instance.ScoreManager.Coin>= price*/)
         {
+            _merchantAnimator.SetTrigger("Buy");
             GameManager.Instance.ScoreManager.DecreaseGold(price);
             container.CurrentLevel += 1; 
             UpdateInfo();

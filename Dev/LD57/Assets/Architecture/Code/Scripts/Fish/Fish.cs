@@ -28,6 +28,11 @@ public class Fish : Catchable
     private ActionType _actionType;
     private HookController _detectedHook;
     public FishStatus fishStatus;
+    
+    private Quaternion _targetRotation;
+    private float _rotationDuration = 0.5f;
+    private float _rotationTimer = 0f;
+    private bool _isRotating = false;
 
     [SerializeField] private UnityEvent OnCatch;
 
@@ -42,6 +47,7 @@ public class Fish : Catchable
 
     private void Start()
     {
+        _actionType = ActionType.Waiting;
         _startPosition = transform.position;
         _startScale = transform.localScale;
         if (initOnStart)
@@ -76,16 +82,42 @@ public class Fish : Catchable
                 float curveT = speedCurve.Evaluate(t);
 
                 Vector2 direction = (_targetPosition - (Vector2)transform.position).normalized;
-                float signOfDirection = Mathf.Sign(direction.x) * -1;
-                transform.localScale = new Vector3(_startScale.x * signOfDirection, transform.localScale.y, transform.localScale.z);
-                transform.position = Vector2.Lerp(_fromPosition, _targetPosition, curveT);
-                 
 
-                if (t >= 1f)
+                /*if (Mathf.Abs(direction.x) > 0.01f)
                 {
+                    float signOfDirection = Mathf.Sign(direction.x) * -1;
+                    transform.localScale = new Vector3(_startScale.x * signOfDirection, transform.localScale.y, transform.localScale.z);
+                }*/
+                if (Mathf.Abs(direction.x) > 0.01f)
+                {
+                    float signOfDirection = Mathf.Sign(direction.x);
+                    float targetYAngle = signOfDirection < 0f ? 0f : 180f;
+                    _targetRotation = Quaternion.Euler(0f, targetYAngle, 0f);
+                    _rotationTimer = 0f;
+                    _isRotating = true;
+                }
+                
+                if (_isRotating)
+                {
+                    _rotationTimer += Time.deltaTime;
+                    float d = Mathf.Clamp01(_rotationTimer / _rotationDuration);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, d);
+
+                    if (d >= 1f)
+                    {
+                        _isRotating = false;
+                    }
+                }
+
+                transform.position = Vector2.Lerp(_fromPosition, _targetPosition, curveT);
+
+                if (Vector2.Distance(transform.position, _targetPosition) < 0.01f)
+                {
+                    transform.position = _targetPosition;
                     _actionType = ActionType.Waiting;
                     _timer = 0f;
                 }
+
                 break;
             case ActionType.Detected:
                 if (_detectedHook.transform.position.y > -2 || _detectedHook.IsCatched())
@@ -105,10 +137,26 @@ public class Fish : Catchable
 
     private void BeginNewMovement()
     {
-        _fromPosition = transform.position;
-        Vector2 randomOffset = Random.insideUnitCircle * wanderRadius;
-        _targetPosition = _startPosition + randomOffset;
+        for (int i = 0; i < 10; i++) 
+        {
+            Vector2 randomOffset = Random.insideUnitCircle * wanderRadius;
+            Vector2 potentialPosition = _startPosition + randomOffset;
 
+            if (Vector2.Distance(potentialPosition, _startPosition) <= wanderRadius)
+            {
+                _targetPosition = potentialPosition;
+                break;
+            }
+        }
+
+        Vector2 direction = _targetPosition - (Vector2)transform.position;
+        if (Mathf.Abs(direction.x) > 0.01f)
+        {
+            float sign = Mathf.Sign(direction.x);
+            _targetRotation = Quaternion.Euler(0f, sign < 0f ? 180f : 0f, 0f);
+        }
+
+        _fromPosition = transform.position;
         _timer = 0f;
         _actionType = ActionType.Moving;
     }
