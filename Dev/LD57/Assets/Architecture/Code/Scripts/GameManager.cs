@@ -66,18 +66,6 @@ public class GameManager : MonoBehaviour
         {
             input.gameObject.SetActive(true);
         }
-
-        if (isEndlessMode)
-        {
-            UnlockAll();
-        }
-    }
-
-    private void UnlockAll()
-    {
-        //unlock all bait
-        //unlock shop
-        //unlock book
     }
     
     public void SetName()
@@ -215,6 +203,12 @@ public class GameManager : MonoBehaviour
             _actionState = PlayerActionState.Catching;
             _hookController.StartCatching();
         }
+
+        var caughtObject = _hookController.GetCatchedObject() as Fish;
+        if (caughtObject)
+        {
+            if (!_roundManager.RightFish(caughtObject.fishStatus.fishId)) Lose();
+        }
     }
 
     public void StopCatching(Catchable catchable)
@@ -237,15 +231,14 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case CatchableType.Fish:
-                if (isEndlessMode) _roundManager.CheckFish((catchable as Fish).fishStatus.fishId); 
+                if (isEndlessMode && !_roundManager.RightFish((catchable as Fish).fishStatus.fishId)) return;
                 _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
                 _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
                 _fishCaught++;
-                if (_roundManager.RightFish((catchable as Fish).fishStatus.fishId) && isEndlessMode)
+                if (isEndlessMode && _roundManager.RightFish((catchable as Fish).fishStatus.fishId))
                 {
                     _roundManager.SetNewFish();
                 }
-
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;

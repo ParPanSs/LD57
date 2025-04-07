@@ -45,6 +45,11 @@ public class HookController : MonoBehaviour
         return _catchedObject != null;
     }
 
+    public Catchable GetCatchedObject()
+    {
+        return _catchedObject;
+    }
+
     public void StartHooking(float speed)
     {
         _isAnimated = true;
@@ -56,12 +61,12 @@ public class HookController : MonoBehaviour
         }
         _playerAnimator.SetTrigger(HOOK_TRIGGER);
         LeanTween.delayedCall(0.4f, () =>
-       {
+        {
             _startCatchPosition = transform.position;
-            transform.rotation = Quaternion.Euler(Vector3.forward *-110 );
-           _isAnimated = false;
-           _hookingHint.SetActive(true);
-       });
+            transform.rotation = Quaternion.Euler(Vector3.forward * -110);
+            _isAnimated = false;
+            _hookingHint.SetActive(true);
+        });
     }
 
     public void StartCatching()
@@ -70,9 +75,9 @@ public class HookController : MonoBehaviour
         _xFactor = 0;
         _isAnimated = true;
         LeanTween.moveX(gameObject, transform.position.x + 0.5f, _shakingTime).setEaseShake().setOnComplete(() =>
-       {
-           _isAnimated = false;
-       });
+        {
+            _isAnimated = false;
+        });
     }
 
     private void StopCatching()
