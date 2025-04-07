@@ -6,6 +6,9 @@ using TMPro;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,23 +22,28 @@ public class GameManager : MonoBehaviour
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
     [SerializeField] private float _aimingSpeed;
-    [SerializeField] private HookController _hookController;
     [SerializeField] private Slider _aimingSlider;
+    [SerializeField] private Slider _mainVolumeSlider;
+    [SerializeField] private Slider _sfxVolumeSlider;
+    [SerializeField] private TMP_InputField namePanel;
+    [SerializeField] private AudioMixer mainAudioMixer;
+    [SerializeField] private AudioMixer sfxAudioMixer;
     [SerializeField] private GameObject _bookPlane;
     [SerializeField] private GameObject _shopPlane;
+    [SerializeField] private GameObject _pausePanel;
+    [SerializeField] private GameObject highScorePanel;
+    [SerializeField] private GameObject highScoreSpawnPoint;
+    [SerializeField] private GameObject playerInPanel;
+    [SerializeField] private GameObject input;
+    [SerializeField] private HookController _hookController;
     [SerializeField] private FishManager _fishManager;
     [SerializeField] private BaitManager _baitManager;
     [SerializeField] private ScoreManager _scoreManager;
     [SerializeField] private RoundManager _roundManager;
+    [SerializeField] private ApiConnector apiConnector;
     [SerializeField] private List<GameObject> tails;
     [SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
     [SerializeField] private SerializedDictionary<CatchableObjectType, List<GameObject>> _catchedObjects;
-    [SerializeField] private GameObject highScorePanel;
-    [SerializeField] private GameObject highScoreSpawnPoint;
-    [SerializeField] private GameObject playerInPanel;
-    [SerializeField] private ApiConnector apiConnector;
-    [SerializeField] private GameObject input;
-    [SerializeField] private TMP_InputField namePanel;
 
     public List<GameObject> Tails => tails;
     public FishManager FishManager => _fishManager;
@@ -61,25 +69,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        mainAudioMixer.GetFloat("Volume", out float volume);
+        _mainVolumeSlider.value = volume;
+        sfxAudioMixer.GetFloat("Volume", out float sfxVolume);
+        _sfxVolumeSlider.value = sfxVolume;
+
         apiConnector.GetPlayers();
         if (isFirstTimePlaying && isEndlessMode)
         {
             input.gameObject.SetActive(true);
         }
-
-        if (isEndlessMode)
-        {
-            UnlockAll();
-        }
     }
 
-    private void UnlockAll()
-    {
-        //unlock all bait
-        //unlock shop
-        //unlock book
-    }
-    
     public void SetName()
     {
         _playerName = namePanel.text;
@@ -128,7 +129,7 @@ public class GameManager : MonoBehaviour
     {
         isDataGot = false;
         _actionState = PlayerActionState.Lose;
-        
+
         StartCoroutine(GetDataFromServer());
     }
 
@@ -215,6 +216,12 @@ public class GameManager : MonoBehaviour
             _actionState = PlayerActionState.Catching;
             _hookController.StartCatching();
         }
+
+        var caughtObject = _hookController.GetCatchedObject() as Fish;
+        if (caughtObject)
+        {
+            if (!_roundManager.RightFish(caughtObject.fishStatus.fishId)) Lose();
+        }
     }
 
     public void StopCatching(Catchable catchable)
@@ -237,20 +244,19 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case CatchableType.Fish:
-                if (isEndlessMode) _roundManager.CheckFish((catchable as Fish).fishStatus.fishId); 
+                if (isEndlessMode && !_roundManager.RightFish((catchable as Fish).fishStatus.fishId)) return;
                 _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
                 _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
                 _fishCaught++;
-                if (_roundManager.RightFish((catchable as Fish).fishStatus.fishId) && isEndlessMode)
+                if (isEndlessMode && _roundManager.RightFish((catchable as Fish).fishStatus.fishId))
                 {
                     _roundManager.SetNewFish();
                 }
-
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
                 if (_catchedObjects.ContainsKey(type))
-                { 
+                {
                     foreach (var item in _catchedObjects[type])
                     {
                         item.SetActive(true);
@@ -323,11 +329,60 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Pause Methods
+    public void SetMainVolume(float value)
+    {
+        mainAudioMixer.SetFloat("Volume", value);
+    }
+
+    public void SetSFXVolume(float value)
+    {
+        sfxAudioMixer.SetFloat("SFXVolume", value);
+    }
+
+    public void Resume()
+    {
+        _actionState = PlayerActionState.Idle;
+        _pausePanel.SetActive(false);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    #endregion
+
+    public void SetLowpassForMixers(float y)
+    {
+        float lowpass;
+        if (y > -2.5f)
+        {
+            lowpass = 22000;
+        }
+        else
+        {
+            // Ограничим вход от -700 до -2.5
+            float clamped = Mathf.Clamp(y, -700f, -2.5f);
+
+            // Преобразуем от -700 (0) до -2.5 (1)
+            var t = Mathf.InverseLerp(-2.5f, -700f,  clamped);
+            lowpass = Mathf.Lerp(6000f, 250f, t);
+
+        }
+        mainAudioMixer.SetFloat("Lowpass", lowpass);
+        sfxAudioMixer   .SetFloat("SFXLowpass", lowpass);
+    }
     private void CancelHandle()
     {
         switch (_actionState)
         {
             case PlayerActionState.Idle:
+                _actionState = PlayerActionState.Pause;
+                _pausePanel.SetActive(true);
+                break;
+            case PlayerActionState.Pause:
+                _actionState = PlayerActionState.Idle;
+                _pausePanel.SetActive(false);
                 break;
             case PlayerActionState.Aiming:
                 _actionState = PlayerActionState.Idle;
@@ -364,4 +419,5 @@ public enum PlayerActionState
     Reading,
     Shop,
     Lose,
+    Pause,
 }

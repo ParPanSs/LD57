@@ -22,15 +22,6 @@ public class RoundManager : MonoBehaviour
         _fishId = GameManager.Instance.FishManager.GetAllFish().ElementAt(fishNumber).Key;
     }
 
-    public void CheckFish(FishId fishId)
-    {
-        if (fishId != _fishId)
-        {
-            GameManager.Instance.Lose();
-            return;
-        }
-    }
-
     public bool RightFish(FishId fishId)
     {
         return fishId == _fishId;

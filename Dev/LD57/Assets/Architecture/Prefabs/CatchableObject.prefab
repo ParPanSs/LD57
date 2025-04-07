@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9065102550505924794}
   - component: {fileID: 2773779743576299170}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,6 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _catchableType: 2
   _shakingTime: 0.3
+  hasAnimator: 0
+  animator: {fileID: 0}
   _catchableObjectType: 0
 --- !u!61 &1365579966412638139
 BoxCollider2D:

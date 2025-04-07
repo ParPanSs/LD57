@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-4769415083263406980
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 9c23d69b1ca408845b011971efa9148c
+  m_EffectName: Lowpass
+  m_MixLevel: ca99e4a8fce2ea7488dcf16412c9d842
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 68a36eda90871f04db13f1ea4b6def2f
+  - m_ParameterName: Resonance
+    m_GUID: 818a6bd27f787d84cba50246c4ab843b
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -18,6 +36,8 @@ AudioMixerController:
   m_ExposedParameters:
   - guid: 3a289888d976f8a41bf9f259d9d01407
     name: SFXVolume
+  - guid: 68a36eda90871f04db13f1ea4b6def2f
+    name: SFXLowpass
   m_AudioMixerGroupViews:
   - guids:
     - a9c485da74def4b4db1bacc8a5da7798
@@ -39,6 +59,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
+  - {fileID: -4769415083263406980}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -66,5 +87,6 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: fc915f1ec3729694883c02073a27ed1c
-  m_FloatValues: {}
+  m_FloatValues:
+    68a36eda90871f04db13f1ea4b6def2f: 22000
   m_TransitionOverrides: {}
