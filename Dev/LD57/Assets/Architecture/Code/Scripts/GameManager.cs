@@ -160,6 +160,31 @@ public class GameManager : MonoBehaviour
         isFirstTimePlaying = false;
     }
 
+    public void LeaderboardButtonAction(int value)
+    {
+        switch (value)
+        {
+            case 0: 
+                StartCoroutine(ToMainMenuTransition()); 
+                break;
+            case 1:
+                StartCoroutine(RestartScene());
+                break;
+        }
+    }
+
+    private IEnumerator ToMainMenuTransition()
+    {
+        yield return new WaitUntil(() => isDataGot);
+        SceneManager.LoadScene(0);
+    }
+    private IEnumerator RestartScene()
+    {
+        yield return new WaitUntil(() => isDataGot);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
+    
     private bool IsCatchableObjectOpened(CatchableObjectType catchableObjectType)
     {
         return _catchedObjects.ContainsKey(catchableObjectType) && _catchedObjects[catchableObjectType][0].activeSelf;
@@ -361,10 +386,10 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Ограничим вход от -700 до -2.5
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ -700 пїЅпїЅ -2.5
             float clamped = Mathf.Clamp(y, -700f, -2.5f);
 
-            // Преобразуем от -700 (0) до -2.5 (1)
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ -700 (0) пїЅпїЅ -2.5 (1)
             var t = Mathf.InverseLerp(-2.5f, -700f,  clamped);
             lowpass = Mathf.Lerp(6000f, 250f, t);
 
