@@ -1,0 +1,55 @@
+
+skeleton.png
+size: 661,402
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Body
+  rotate: false
+  xy: 2, 2
+  size: 396, 398
+  orig: 512, 512
+  offset: 59, 57
+  index: -1
+Hand right
+  rotate: false
+  xy: 558, 84
+  size: 81, 97
+  orig: 128, 128
+  offset: 23, 16
+  index: -1
+Lamp
+  rotate: false
+  xy: 400, 80
+  size: 156, 101
+  orig: 256, 128
+  offset: 51, 15
+  index: -1
+Lamp2
+  rotate: false
+  xy: 546, 4
+  size: 79, 74
+  orig: 128, 128
+  offset: 24, 33
+  index: -1
+Light
+  rotate: false
+  xy: 400, 183
+  size: 217, 217
+  orig: 256, 256
+  offset: 19, 20
+  index: -1
+Open month
+  rotate: false
+  xy: 400, 5
+  size: 144, 73
+  orig: 256, 128
+  offset: 54, 32
+  index: -1
+Siggare
+  rotate: true
+  xy: 619, 275
+  size: 125, 40
+  orig: 128, 64
+  offset: 1, 13
+  index: -1
