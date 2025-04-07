@@ -1,0 +1,117 @@
+
+skeleton.png
+size: 1032,2045
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Hook
+  rotate: true
+  xy: 335, 143
+  size: 64, 128
+  orig: 64, 128
+  offset: 0, 0
+  index: -1
+Лодка бэк
+  rotate: false
+  xy: 2, 1015
+  size: 1028, 1028
+  orig: 1028, 1028
+  offset: 0, 0
+  index: -1
+голова
+  rotate: true
+  xy: 2, 121
+  size: 378, 209
+  orig: 512, 256
+  offset: 59, 24
+  index: -1
+зрачки
+  rotate: false
+  xy: 2, 2
+  size: 15, 8
+  orig: 128, 8
+  offset: 25, 0
+  index: -1
+леска
+  rotate: true
+  xy: 269, 8
+  size: 127, 401
+  orig: 128, 512
+  offset: 0, 61
+  index: -1
+рука левая
+  rotate: true
+  xy: 213, 137
+  size: 70, 120
+  orig: 128, 128
+  offset: 27, 6
+  index: -1
+рука правая
+  rotate: false
+  xy: 185, 7
+  size: 82, 112
+  orig: 128, 128
+  offset: 22, 8
+  index: -1
+рукав левый
+  rotate: false
+  xy: 95, 14
+  size: 88, 105
+  orig: 128, 256
+  offset: 17, 138
+  index: -1
+рукав правый
+  rotate: false
+  xy: 2, 12
+  size: 91, 107
+  orig: 256, 256
+  offset: 59, 119
+  index: -1
+торс
+  rotate: true
+  xy: 213, 209
+  size: 290, 196
+  orig: 512, 256
+  offset: 110, 30
+  index: -1
+увсы
+  rotate: true
+  xy: 482, 901
+  size: 112, 28
+  orig: 128, 32
+  offset: 5, 3
+  index: -1
+удочка
+  rotate: false
+  xy: 2, 501
+  size: 478, 512
+  orig: 512, 512
+  offset: 0, 0
+  index: -1
+усы
+  rotate: false
+  xy: 465, 166
+  size: 128, 57
+  orig: 128, 64
+  offset: 0, 4
+  index: -1
+штаны
+  rotate: true
+  xy: 411, 225
+  size: 274, 128
+  orig: 512, 128
+  offset: 117, 0
+  index: -1
+
+skeleton2.png
+size: 1032,1032
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Лодка фронт
+  rotate: false
+  xy: 2, 2
+  size: 1028, 1028
+  orig: 1028, 1028
+  offset: 0, 0
+  index: -1
