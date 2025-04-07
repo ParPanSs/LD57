@@ -8,9 +8,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button endlessButton;
     [SerializeField] private AudioMixer mainAudioMixer;
     [SerializeField] private AudioMixer sfxAudioMixer;
+    [SerializeField] private Slider mainAudioSlider;
+    [SerializeField] private Slider sfxAudioSlider;
 
     private void Awake()
     {
+        mainAudioSlider.value = -20;
+        sfxAudioSlider.value = -20;
         if (!GameManager.isAnglerCatched)
         {
             //endlessButton.interactable = false;
@@ -30,7 +34,6 @@ public class MainMenuController : MonoBehaviour
     
     public void SetMainVolume(float value)
     {
-        Debug.Log(value);
         mainAudioMixer.SetFloat("Volume", value);     
     }
     
