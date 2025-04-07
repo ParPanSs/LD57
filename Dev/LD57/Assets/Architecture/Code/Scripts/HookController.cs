@@ -147,7 +147,7 @@ public class HookController : MonoBehaviour
             if (canCatch)
             {
                 _catchedObject = catchable;
-                _catchedObject.transform.SetParent(transform);
+                _catchedObject.transform.SetParent(_activeBait.transform);
                 _catchedObject.transform.localPosition = pos;
             }
             GameManager.Instance.StartCatching();
