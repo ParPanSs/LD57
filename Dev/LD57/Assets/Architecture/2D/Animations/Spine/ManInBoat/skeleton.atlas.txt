@@ -4,11 +4,11 @@ size: 1032,2045
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Hook
-  rotate: true
-  xy: 335, 143
-  size: 64, 128
-  orig: 64, 128
+Eyes
+  rotate: false
+  xy: 327, 138
+  size: 87, 22
+  orig: 87, 22
   offset: 0, 0
   index: -1
 Лодка бэк
@@ -28,20 +28,20 @@ Hook
 зрачки
   rotate: false
   xy: 2, 2
-  size: 15, 8
+  size: 76, 8
   orig: 128, 8
-  offset: 25, 0
+  offset: 26, 0
   index: -1
 леска
   rotate: true
-  xy: 269, 8
-  size: 127, 401
-  orig: 128, 512
-  offset: 0, 61
+  xy: 213, 360
+  size: 139, 469
+  orig: 154, 544
+  offset: 12, 21
   index: -1
 рука левая
-  rotate: true
-  xy: 213, 137
+  rotate: false
+  xy: 505, 238
   size: 70, 120
   orig: 128, 128
   offset: 27, 6
@@ -68,15 +68,15 @@ Hook
   offset: 59, 119
   index: -1
 торс
-  rotate: true
-  xy: 213, 209
+  rotate: false
+  xy: 213, 162
   size: 290, 196
   orig: 512, 256
   offset: 110, 30
   index: -1
 увсы
-  rotate: true
-  xy: 482, 901
+  rotate: false
+  xy: 213, 132
   size: 112, 28
   orig: 128, 32
   offset: 5, 3
@@ -90,14 +90,14 @@ Hook
   index: -1
 усы
   rotate: false
-  xy: 465, 166
+  xy: 505, 179
   size: 128, 57
   orig: 128, 64
   offset: 0, 4
   index: -1
 штаны
-  rotate: true
-  xy: 411, 225
+  rotate: false
+  xy: 269, 2
   size: 274, 128
   orig: 512, 128
   offset: 117, 0
