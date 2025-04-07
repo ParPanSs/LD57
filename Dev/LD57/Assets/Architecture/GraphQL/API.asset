@@ -1,0 +1,320 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ccf793b7ca1cc645b9cd36d753b8e3c, type: 3}
+  m_Name: API
+  m_EditorClassIdentifier: 
+  url: https://solid-mosquito-99.hasura.app/v1/graphql
+  queries:
+  - name: getAllPlayers
+    type: 0
+    query: "query getAllPlayers{\n    players{\n        player_table_position\n       
+      player_name\n        player_score\n        player_fish\n    }\n}"
+    queryString: players
+    returnType: players
+    queryOptions:
+    - players
+    - players_aggregate
+    - players_by_pk
+    fields:
+    - index: 4
+      name: player_table_position
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 2
+      name: player_name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 3
+      name: player_score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 0
+      name: player_fish
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  - name: topPlayers
+    type: 0
+    query: "query topPlayers{\n    players(  limit :5, order_by :{ player_score :desc}
+      ){\n        player_name\n        player_score\n        player_fish\n    }\n}"
+    queryString: players
+    returnType: players
+    queryOptions:
+    - players
+    - players_aggregate
+    - players_by_pk
+    fields:
+    - index: 2
+      name: player_name
+      type: String
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 3
+      name: player_score
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 0
+      name: player_fish
+      type: Int
+      parentIndexes: 
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  mutations:
+  - name: addPlayer
+    type: 1
+    query: "mutation addPlayer{\n    insert_players(  objects :{ player_name :\"alexxx\",
+      player_score :0, player_fish :0} ){\n        returning{\n            player_name\n           
+      player_score\n            player_fish\n        }\n    }\n}"
+    queryString: insert_players
+    returnType: players_mutation_response
+    queryOptions:
+    - delete_players
+    - delete_players_by_pk
+    - insert_players
+    - insert_players_one
+    - update_players
+    - update_players_by_pk
+    - update_players_many
+    fields:
+    - index: 1
+      name: returning
+      type: players
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: affected_rows
+        type: Int
+      - name: returning
+        type: players
+      hasChanged: 0
+    - index: 2
+      name: player_name
+      type: String
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 3
+      name: player_score
+      type: Int
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 0
+      name: player_fish
+      type: Int
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  - name: updateScore
+    type: 1
+    query: "mutation updateScore{\n    update_players{\n        returning{\n           
+      player_name\n            player_score\n            player_fish\n        }\n   
+      }\n}"
+    queryString: update_players
+    returnType: players_mutation_response
+    queryOptions:
+    - delete_players
+    - delete_players_by_pk
+    - insert_players
+    - insert_players_one
+    - update_players
+    - update_players_by_pk
+    - update_players_many
+    fields:
+    - index: 1
+      name: returning
+      type: players
+      parentIndexes: 
+      hasSubField: 1
+      possibleFields:
+      - name: affected_rows
+        type: Int
+      - name: returning
+        type: players
+      hasChanged: 0
+    - index: 2
+      name: player_name
+      type: String
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 3
+      name: player_score
+      type: Int
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    - index: 0
+      name: player_fish
+      type: Int
+      parentIndexes: 00000000
+      hasSubField: 0
+      possibleFields:
+      - name: player_fish
+        type: Int
+      - name: player_id
+        type: uuid
+      - name: player_name
+        type: String
+      - name: player_score
+        type: Int
+      - name: player_table_position
+        type: Int
+      hasChanged: 0
+    isComplete: 1
+  subscriptions: []
+  loading: 0

@@ -14,7 +14,7 @@ public class MainMenuController : MonoBehaviour
     {
         if (!GameManager.isAnglerCatched)
         {
-            endlessButton.interactable = false;
+            //endlessButton.interactable = false;
         }
     }
 

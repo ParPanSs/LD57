@@ -1,6 +1,8 @@
+using System.Collections;
 using AYellowpaper.SerializedCollections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +30,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> tails;
     [SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
     [SerializeField] private SerializedDictionary<CatchableObjectType, List<GameObject>> _catchedObjects;
+    [SerializeField] private GameObject highScorePanel;
+    [SerializeField] private GameObject highScoreSpawnPoint;
+    [SerializeField] private GameObject playerInPanel;
+    [SerializeField] private ApiConnector apiConnector;
+    [SerializeField] private GameObject input;
+    [SerializeField] private TMP_InputField namePanel;
+
     public List<GameObject> Tails => tails;
     public FishManager FishManager => _fishManager;
     public BaitManager BaitManager => _baitManager;
@@ -40,13 +49,30 @@ public class GameManager : MonoBehaviour
     public PlayerActionState ActionState => _actionState;
     public static bool isAnglerCatched;
     public static bool isEndlessMode;
+    public static bool isFirstTimePlaying = true;
+    public bool isDataGot;
+    private static string _playerName;
+    private int _fishCaught;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Update()
+    private void Start()
+    {
+        if (isFirstTimePlaying)
+        {
+            input.gameObject.SetActive(true);
+        }
+    }
+
+    public void SetName()
+    {
+        _playerName = namePanel.text;
+    }
+
+private void Update()
     {
         if (_actionState == PlayerActionState.Aiming)
         {
@@ -82,6 +108,41 @@ public class GameManager : MonoBehaviour
         {
             ShopHandler();
         }
+    }
+
+    [Button("LOSE TEST")]
+    public void Lose()
+    {
+        isDataGot = false;
+        _actionState = PlayerActionState.Lose;
+        if (isFirstTimePlaying)
+        {
+            apiConnector.AddPlayer(_playerName, _scoreManager.Score, _fishCaught);
+        }
+        else
+        {
+            apiConnector.UpdatePlayerScore(_playerName, _scoreManager.Score, _fishCaught);
+        }
+
+        StartCoroutine(GetDataFromServer());
+    }
+
+    private IEnumerator GetDataFromServer()
+    {
+        yield return new WaitUntil(() => isDataGot);
+        apiConnector.DisplayTopScore();
+        yield return new WaitUntil(() => isDataGot);
+        GameObject createdPlayer;
+        List<PlayerData> playerData = new();
+        playerData = apiConnector.GetPlayerData();
+        for (int i = playerData.Count - 1; i >= 0; i--)
+        {
+            createdPlayer = Instantiate(playerInPanel, highScoreSpawnPoint.transform);
+            createdPlayer.GetComponent<PlayerDataInTable>().SetPlayersTable($"#{i + 1}", playerData[i].playerName,
+                playerData[i].playerScore.ToString(), playerData[i].playerFish.ToString());
+        }
+        highScorePanel.SetActive(true);
+        isFirstTimePlaying = false;
     }
 
     private bool IsCatchableObjectOpened(CatchableObjectType catchableObjectType)
@@ -139,6 +200,7 @@ public class GameManager : MonoBehaviour
         {
             _actionState = PlayerActionState.Catching;
             _hookController.StartCatching();
+            
         }
     }
 
@@ -163,6 +225,7 @@ public class GameManager : MonoBehaviour
                 break;
             case CatchableType.Fish:
                 _roundManager.CheckFish((catchable as Fish).fishStatus.fishId);
+                if (!_roundManager.RightFish((catchable as Fish).fishStatus.fishId) && isEndlessMode) return;
                 _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
                 _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
                 break;
@@ -282,5 +345,5 @@ public enum PlayerActionState
     SelectingBait,
     Reading,
     Shop,
-
+    Lose,
 }

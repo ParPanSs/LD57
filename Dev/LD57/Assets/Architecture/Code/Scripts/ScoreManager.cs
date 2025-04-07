@@ -50,7 +50,6 @@ public class ScoreManager : MonoBehaviour
         for (int i = amount; i <= amount + value; i++)
         {
             scoreText.text = $"Score: {i}";
-            //yield return new WaitForSeconds(.00000000001f);
         }
         Score = amount + value;
         yield break;
