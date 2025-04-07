@@ -16,8 +16,8 @@ MonoBehaviour:
   queries:
   - name: getAllPlayers
     type: 0
-    query: "query getAllPlayers{\n    players{\n        player_table_position\n       
-      player_name\n        player_score\n        player_fish\n    }\n}"
+    query: "query getAllPlayers{\n    players{\n        player_name\n        player_score\n       
+      player_fish\n    }\n}"
     queryString: players
     returnType: players
     queryOptions:
@@ -25,23 +25,6 @@ MonoBehaviour:
     - players_aggregate
     - players_by_pk
     fields:
-    - index: 4
-      name: player_table_position
-      type: Int
-      parentIndexes: 
-      hasSubField: 0
-      possibleFields:
-      - name: player_fish
-        type: Int
-      - name: player_id
-        type: uuid
-      - name: player_name
-        type: String
-      - name: player_score
-        type: Int
-      - name: player_table_position
-        type: Int
-      hasChanged: 0
     - index: 2
       name: player_name
       type: String
@@ -160,7 +143,7 @@ MonoBehaviour:
   mutations:
   - name: addPlayer
     type: 1
-    query: "mutation addPlayer{\n    insert_players(  objects :{ player_name :\"alexxx\",
+    query: "mutation addPlayer{\n    insert_players(  objects :{ player_name :\"monusy\",
       player_score :0, player_fish :0} ){\n        returning{\n            player_name\n           
       player_score\n            player_fish\n        }\n    }\n}"
     queryString: insert_players
@@ -239,7 +222,8 @@ MonoBehaviour:
     isComplete: 1
   - name: updateScore
     type: 1
-    query: "mutation updateScore{\n    update_players{\n        returning{\n           
+    query: "mutation updateScore{\n    update_players(  where :{ player_name :{ _eq
+      :\"monusy\"}}, _set :{ player_score :525, player_fish :1} ){\n        returning{\n           
       player_name\n            player_score\n            player_fish\n        }\n   
       }\n}"
     queryString: update_players
@@ -278,8 +262,6 @@ MonoBehaviour:
         type: String
       - name: player_score
         type: Int
-      - name: player_table_position
-        type: Int
       hasChanged: 0
     - index: 3
       name: player_score
@@ -295,8 +277,6 @@ MonoBehaviour:
         type: String
       - name: player_score
         type: Int
-      - name: player_table_position
-        type: Int
       hasChanged: 0
     - index: 0
       name: player_fish
@@ -311,8 +291,6 @@ MonoBehaviour:
       - name: player_name
         type: String
       - name: player_score
-        type: Int
-      - name: player_table_position
         type: Int
       hasChanged: 0
     isComplete: 1

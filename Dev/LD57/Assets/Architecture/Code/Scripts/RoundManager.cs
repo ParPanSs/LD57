@@ -15,9 +15,9 @@ public class RoundManager : MonoBehaviour
         SetNewFish();
     }
     
-    private void SetNewFish()
+    public void SetNewFish()
     {
-        var fishNumber = Random.Range(0, fishSprites.Count - 1);
+        var fishNumber = Random.Range(0, fishSprites.Count);
         fishImage.sprite = fishSprites[fishNumber];
         _fishId = GameManager.Instance.FishManager.GetAllFish().ElementAt(fishNumber).Key;
     }
@@ -29,7 +29,6 @@ public class RoundManager : MonoBehaviour
             GameManager.Instance.Lose();
             return;
         }
-        SetNewFish();
     }
 
     public bool RightFish(FishId fishId)

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -26,16 +25,18 @@ public class MainMenuController : MonoBehaviour
     public void PlayEndless()
     {
         SceneManager.LoadScene(2);
+        GameManager.isEndlessMode = true;
     }
     
     public void SetMainVolume(float value)
     {
+        Debug.Log(value);
         mainAudioMixer.SetFloat("Volume", value);     
     }
     
     public void SetSFXVolume(float value)
     {
-        sfxAudioMixer.SetFloat("Volume", value);     
+        sfxAudioMixer.SetFloat("SFXVolume", value);     
     }
 
     public void ExitGame()

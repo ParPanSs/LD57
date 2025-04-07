@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
     public PlayerActionState ActionState => _actionState;
     public static bool isAnglerCatched;
     public static bool isEndlessMode;
-    public static bool isFirstTimePlaying = true;
+    public bool isFirstTimePlaying = true;
     public bool isDataGot;
-    private static string _playerName;
+    private string _playerName;
     private int _fishCaught;
 
     private void Awake()
@@ -61,18 +61,31 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        apiConnector.GetPlayers();
         if (isFirstTimePlaying && isEndlessMode)
         {
             input.gameObject.SetActive(true);
         }
+
+        if (isEndlessMode)
+        {
+            UnlockAll();
+        }
     }
 
+    private void UnlockAll()
+    {
+        //unlock all bait
+        //unlock shop
+        //unlock book
+    }
+    
     public void SetName()
     {
         _playerName = namePanel.text;
     }
 
-private void Update()
+    private void Update()
     {
         if (_actionState == PlayerActionState.Aiming)
         {
@@ -115,21 +128,22 @@ private void Update()
     {
         isDataGot = false;
         _actionState = PlayerActionState.Lose;
-        if (isFirstTimePlaying)
-        {
-            apiConnector.AddPlayer(_playerName, _scoreManager.Score, _fishCaught);
-        }
-        else
-        {
-            apiConnector.UpdatePlayerScore(_playerName, _scoreManager.Score, _fishCaught);
-        }
-
+        
         StartCoroutine(GetDataFromServer());
     }
 
     private IEnumerator GetDataFromServer()
     {
-        yield return new WaitUntil(() => isDataGot);
+        if (!apiConnector.IsPlayerExist(_playerName))
+        {
+            apiConnector.AddPlayer(_playerName, _scoreManager.Score, _fishCaught);
+            yield return new WaitUntil(() => isDataGot);
+        }
+        if (apiConnector.IsPlayerExist(_playerName) && _scoreManager.Score > apiConnector.GetPlayerScore(_playerName))
+        {
+            apiConnector.UpdatePlayerScore(_playerName, _scoreManager.Score, _fishCaught);
+            yield return new WaitUntil(() => isDataGot);
+        }
         apiConnector.DisplayTopScore();
         yield return new WaitUntil(() => isDataGot);
         GameObject createdPlayer;
@@ -200,7 +214,6 @@ private void Update()
         {
             _actionState = PlayerActionState.Catching;
             _hookController.StartCatching();
-            
         }
     }
 
@@ -224,10 +237,15 @@ private void Update()
                 }
                 break;
             case CatchableType.Fish:
-                if (isEndlessMode) _roundManager.CheckFish((catchable as Fish).fishStatus.fishId);
-                if (!_roundManager.RightFish((catchable as Fish).fishStatus.fishId) && isEndlessMode) return;
+                if (isEndlessMode) _roundManager.CheckFish((catchable as Fish).fishStatus.fishId); 
                 _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
                 _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
+                _fishCaught++;
+                if (_roundManager.RightFish((catchable as Fish).fishStatus.fishId) && isEndlessMode)
+                {
+                    _roundManager.SetNewFish();
+                }
+
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
