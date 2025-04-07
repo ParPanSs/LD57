@@ -171,13 +171,14 @@ public class Fish : Catchable
 
     public bool TryToHook(BaitId baitId)
     {
-        if(_actionType == ActionType.Hooked || _actionType == ActionType.Hitting )
+
+        if (_actionType == ActionType.Hooked || _actionType == ActionType.Hitting )
         {
             return false;
         }
         if (fishStatus.needBait && baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
         {
-            transform.rotation = _startRotation;
+        transform.rotation = _startRotation;
             fishParameters.animators[fishStatus.fishId].SetTrigger("OnTheHook");
             _actionType = ActionType.Hooked;
             float sign = Mathf.Sign(transform.localScale.x); 
@@ -204,6 +205,7 @@ public class Fish : Catchable
     {
         if (_currentCooldown > _detectCooldown)
         {
+            transform.rotation = _startRotation; 
             _detectedHook = hook;
             fishParameters.animators[fishStatus.fishId].SetTrigger("IsBaited");
             _actionType = ActionType.Detected;

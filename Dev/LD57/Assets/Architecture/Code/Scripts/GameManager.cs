@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public ScoreManager ScoreManager => _scoreManager;
     public float SpeedStat { get; set; }
     public float MovementStat { get; set; }
-    public float HookStat { get; set; }
+    public float FishPriceStat { get; set; }
 
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
@@ -245,7 +245,7 @@ public class GameManager : MonoBehaviour
                 break;
             case CatchableType.Fish:
                 if (isEndlessMode && !_roundManager.RightFish((catchable as Fish).fishStatus.fishId)) return;
-                _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
+                _scoreManager.IncreaseGold((int)((catchable as Fish).fishStatus.goldReward * FishPriceStat));
                 _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
                 _fishCaught++;
                 if (isEndlessMode && _roundManager.RightFish((catchable as Fish).fishStatus.fishId))

@@ -39,7 +39,7 @@ public class ShopManager : MonoBehaviour
     { 
         var info = upgradeInfo.upgradeDT[container.upgradeType];
         int price = info[container.CurrentLevel + 1].price;
-        if (info.Count > container.CurrentLevel + 1 /*&& GameManager.Instance.ScoreManager.Coin>= price*/)
+        if (info.Count > container.CurrentLevel + 1 && GameManager.Instance.ScoreManager.Coin>= price)
         {
             _merchantAnimator.SetTrigger("Buy");
             GameManager.Instance.ScoreManager.DecreaseGold(price);
@@ -74,7 +74,7 @@ public class ShopManager : MonoBehaviour
                     GameManager.Instance.MovementStat = info[index].currentStat;
                     break;
                 case UpgradeType.Hook:
-                    GameManager.Instance.HookStat = info[index].currentStat;
+                    GameManager.Instance.FishPriceStat = info[index].currentStat;
                     break; 
             }
         }

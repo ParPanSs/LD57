@@ -20,7 +20,7 @@ public class HookController : MonoBehaviour
     private float _xFactor = 0f;
     private float _shakingTime = 0.3f;
     private float _speed;
-    private bool _isAnimated;
+    private bool _isAnimated; 
     private Transform _cameraTransform;
     private Catchable _catchedObject;
     private BaitId _baitId;
@@ -49,7 +49,8 @@ public class HookController : MonoBehaviour
     {
         return _catchedObject;
     }
-
+    [SerializeField]
+    float _cameraParentOffset;
     public void StartHooking(float speed)
     {
         _isAnimated = true;
@@ -61,7 +62,11 @@ public class HookController : MonoBehaviour
         }
         _playerAnimator.SetTrigger(HOOK_TRIGGER);
         LeanTween.delayedCall(0.4f, () =>
-        {
+        { 
+            LeanTween.moveY(_cameraTransform.parent.gameObject, _cameraTransform.parent.position.y + _cameraParentOffset, 0.5f).setOnComplete(()=>
+            {  
+                });
+
             _startCatchPosition = transform.position;
             transform.rotation = Quaternion.Euler(Vector3.forward * -110);
             _isAnimated = false;
@@ -79,7 +84,10 @@ public class HookController : MonoBehaviour
             _isAnimated = false;
         });
     }
-
+    private void ReturnCamera()
+    { 
+        LeanTween.moveY(_cameraTransform.parent.gameObject, 0, 0.3f); 
+    }
     private void StopCatching()
     {
         GameManager.Instance.StopCatching(_catchedObject);
@@ -118,8 +126,12 @@ public class HookController : MonoBehaviour
                 var newPosition = transform.position;
                 newPosition += moveDirection * Time.deltaTime * _speed * _mainSpeed * GameManager.Instance.SpeedStat;
                 newPosition.x = Mathf.Clamp(newPosition.x, -15, 15);
+                
+                {
+                    _cameraTransform.localPosition = Vector3.up * transform.position.y;
+                }
                 transform.position = newPosition;
-                _cameraTransform.position += moveDirection * Time.deltaTime * _speed * _mainSpeed * GameManager.Instance.SpeedStat;
+                //_cameraTransform.position += (moveDirection+Vector3.down*5) * Time.deltaTime * _speed * _mainSpeed * GameManager.Instance.SpeedStat;
                 if (_speed <= 0)
                 {
                     GameManager.Instance.StartCatching();
@@ -131,15 +143,20 @@ public class HookController : MonoBehaviour
                 var deepFactor = -((transform.position.y / 20));
                 deepFactor = Mathf.Max(1f, deepFactor);
                 transform.position += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
-                _cameraTransform.position += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
-                if (_cameraTransform.position.y > 0)
+                 
                 {
-                    _cameraTransform.position = Vector3.zero;
+                    _cameraTransform.localPosition += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
                 }
+
+                if (transform.position.y >= _startCatchPosition.y - 5)
+                {
+                    ReturnCamera();
+                }
+
                 if (transform.position.y >= _startCatchPosition.y - 1)
                 {
                     StopCatching();
-                    _cameraTransform.position = Vector3.zero;
+                    _cameraTransform.localPosition = Vector3.zero;
                 }
             }
         }
