@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (isFirstTimePlaying)
+        if (isFirstTimePlaying && isEndlessMode)
         {
             input.gameObject.SetActive(true);
         }
@@ -224,7 +224,7 @@ private void Update()
                 }
                 break;
             case CatchableType.Fish:
-                _roundManager.CheckFish((catchable as Fish).fishStatus.fishId);
+                if (isEndlessMode) _roundManager.CheckFish((catchable as Fish).fishStatus.fishId);
                 if (!_roundManager.RightFish((catchable as Fish).fishStatus.fishId) && isEndlessMode) return;
                 _scoreManager.IncreaseGold((catchable as Fish).fishStatus.goldReward);
                 _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
