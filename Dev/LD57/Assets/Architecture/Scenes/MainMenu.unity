@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 8300000, guid: f7b027930a7486b4b9eea57867b30013, type: 3}
   clickClip: {fileID: 8300000, guid: 27acca407e5d0954c9a95147011e7f0a, type: 3}
@@ -967,6 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 8300000, guid: f7b027930a7486b4b9eea57867b30013, type: 3}
   clickClip: {fileID: 8300000, guid: 27acca407e5d0954c9a95147011e7f0a, type: 3}
@@ -1218,7 +1220,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1852,6 +1854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 8300000, guid: f7b027930a7486b4b9eea57867b30013, type: 3}
   clickClip: {fileID: 8300000, guid: 27acca407e5d0954c9a95147011e7f0a, type: 3}
@@ -2179,6 +2182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 0}
   clickClip: {fileID: 0}
@@ -2328,6 +2332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 8300000, guid: f7b027930a7486b4b9eea57867b30013, type: 3}
   clickClip: {fileID: 8300000, guid: 27acca407e5d0954c9a95147011e7f0a, type: 3}
@@ -2744,6 +2749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 8300000, guid: f7b027930a7486b4b9eea57867b30013, type: 3}
   clickClip: {fileID: 8300000, guid: 27acca407e5d0954c9a95147011e7f0a, type: 3}
@@ -3809,6 +3815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7906bac8845f7044b12d682f198784b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectable: {fileID: 0}
   sfxSource: {fileID: 1167344889}
   hoverClip: {fileID: 0}
   clickClip: {fileID: 0}
