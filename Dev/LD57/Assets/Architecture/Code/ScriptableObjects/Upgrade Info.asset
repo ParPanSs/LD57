@@ -22,19 +22,19 @@ MonoBehaviour:
         price: 170
       - currentStat: 1.3
         price: 320
-      - currentStat: 1.4
-        price: 500
       - currentStat: 1.5
-        price: 700
-      - currentStat: 1.6
-        price: 1000
+        price: 500
       - currentStat: 1.7
-        price: 1350
+        price: 700
       - currentStat: 1.8
-        price: 1700
+        price: 1000
       - currentStat: 1.9
-        price: 2300
+        price: 1350
       - currentStat: 2
+        price: 1700
+      - currentStat: 2.2
+        price: 2300
+      - currentStat: 2.4
         price: 3000
     - Key: 1
       Value:

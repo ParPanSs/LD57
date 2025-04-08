@@ -8,10 +8,10 @@ public class FishDetector : MonoBehaviour
 
     private void Start()
     {
-        if(_fish.fishStatus.fishId == FishId.SiameseFish)
+        /*if(_fish.fishStatus.fishId == FishId.SiameseFish)
         {
             gameObject.SetActive(false);
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

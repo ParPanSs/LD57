@@ -18,7 +18,7 @@ public class FishManager : MonoBehaviour
     private void Awake()
     {
         _mainCamera = Camera.main;
-    } 
+    }
 
     public List<Fish> SpawnFish(FishId fishId, int value, float minY, float maxY)
     {
@@ -27,7 +27,7 @@ public class FishManager : MonoBehaviour
         for (int i = 0; i < value; i++)
         {
             Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
-            fish = Instantiate(fishPrefab, spawnPoint + randomOffset, Quaternion.identity); 
+            fish = Instantiate(fishPrefab, spawnPoint + randomOffset, Quaternion.identity);
             fish.fishStatus = fishes[fishId];
             fish.InitAnimator(fishId);
             spawnedFish.Add(fish);
@@ -44,19 +44,19 @@ public class FishManager : MonoBehaviour
     public List<Fish> SpawnRandomFish(float minY, float maxY)
     {
         Dictionary<FishId, FishStatus> fishList = new(fishes);
-        if(!GameManager.isEndlessMode)
+        if (!GameManager.isEndlessMode)
         {
             fishList.Remove(FishId.Angler);
-        }
-        foreach (var fish in fishList.ToList())
-        {
-            if(fish.Value.maxYPos < minY)
+            foreach (var fish in fishList.ToList())
             {
-                fishList.Remove(fish.Key);
+                if (fish.Value.maxYPos < minY)
+                {
+                    fishList.Remove(fish.Key);
+                }
             }
         }
-        var randomFishId = fishList.ElementAt(Random.Range(0, fishList.Count)); 
-        return SpawnFish(randomFishId.Key, randomFishId.Value.fishAmount,minY,maxY);
+        var randomFishId = fishList.ElementAt(Random.Range(0, fishList.Count));
+        return SpawnFish(randomFishId.Key, randomFishId.Value.fishAmount, minY, maxY);
     }
 
     public SerializedDictionary<FishId, FishStatus> GetAllFish()

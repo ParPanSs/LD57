@@ -18,5 +18,5 @@ MonoBehaviour:
   needBait: 1
   baitId: 1
   maxYPos: 0
-  goldReward: 25
-  scoreReward: 525
+  goldReward: 40
+  scoreReward: 250
