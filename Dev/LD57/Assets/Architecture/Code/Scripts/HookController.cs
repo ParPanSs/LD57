@@ -89,10 +89,10 @@ public class HookController : MonoBehaviour
     }
     private void StopCatching()
     {
+        GameManager.Instance.PlaySFX(_hookClip);
         GameManager.Instance.StopCatching(_catchedObject);
         transform.localPosition = _startLocalPosition;
         transform.localRotation = Quaternion.Euler(Vector3.forward * -24.38f);
-        GameManager.Instance.PlaySFX(_hookClip);
         if (_catchedObject != null)
         {
             Destroy(_catchedObject.gameObject);

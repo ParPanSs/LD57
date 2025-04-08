@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
     [SerializeField] private Light2D globalLight;
-    
+
     [SerializeField] private float _aimingSpeed;
     [SerializeField] private Slider _aimingSlider;
     [SerializeField] private Slider _mainVolumeSlider;
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     public float FishPriceStat { get; set; }
 
     private PlayerActionState _actionState;
-    public PlayerActionState ActionState => _actionState; 
+    public PlayerActionState ActionState => _actionState;
     public static bool isEndlessMode;
     public bool isFirstTimePlaying = true;
     public bool isDataGot;
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
     {
         switch (value)
         {
-            case 0: 
+            case 0:
                 FaderController.instance.FadeOut(0);
                 break;
             case 1:
@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-    
+
     private bool IsCatchableObjectOpened(CatchableObjectType catchableObjectType)
     {
         return _catchedObjects.ContainsKey(catchableObjectType) && _catchedObjects[catchableObjectType][0].activeSelf;
@@ -263,7 +263,7 @@ public class GameManager : MonoBehaviour
                 break;
             case CatchableType.Fish:
                 var fish = catchable as Fish;
-                if (isEndlessMode) 
+                if (isEndlessMode)
                 {
                     if (!_roundManager.RightFish(fish.fishStatus.fishId))
                     {
@@ -271,12 +271,12 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        _roundManager.SetNewFish(); 
+                        _roundManager.SetNewFish();
                     }
                 }
                 else
                 {
-                    if(fish.fishStatus.fishId == FishId.Angler)
+                    if (fish.fishStatus.fishId == FishId.Angler)
                     {
                         PlayerPrefs.SetInt("isAnglerCatched", 1);
                         cutscene.SetActive(true);
@@ -284,7 +284,7 @@ public class GameManager : MonoBehaviour
                 }
                 _scoreManager.IncreaseGold((int)(fish.fishStatus.goldReward * FishPriceStat));
                 _scoreManager.IncreaseScore(fish.fishStatus.scoreReward);
-                _fishCaught++; 
+                _fishCaught++;
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
@@ -305,15 +305,16 @@ public class GameManager : MonoBehaviour
     #region Bait Methods
     private void BaitHandler()
     {
-        PlaySFX(_openBucketClip);
         if (_actionState == PlayerActionState.Idle)
         {
+            PlaySFX(_openBucketClip);
             _actionState = PlayerActionState.SelectingBait;
             _hints[_actionState].SetActive(false);
             _baitManager.ToggleBaitsPanelActive(true);
         }
         else if (_actionState == PlayerActionState.SelectingBait)
         {
+            PlaySFX(_openBucketClip);
             _actionState = PlayerActionState.Idle;
             _baitManager.ToggleBaitsPanelActive(false);
         }
@@ -331,15 +332,16 @@ public class GameManager : MonoBehaviour
 
     private void BookHandler()
     {
-        PlaySFX(_openBookClip);
         if (_actionState == PlayerActionState.Idle)
         {
+            PlaySFX(_openBookClip);
             _actionState = PlayerActionState.Reading;
             _hints[_actionState].SetActive(false);
             _bookPlane.SetActive(true);
         }
         else if (_actionState == PlayerActionState.Reading)
         {
+            PlaySFX(_openBookClip);
             _actionState = PlayerActionState.Idle;
             _bookPlane.SetActive(false);
         }
@@ -350,15 +352,16 @@ public class GameManager : MonoBehaviour
 
     private void ShopHandler()
     {
-        PlaySFX(_openShopClip); 
         if (_actionState == PlayerActionState.Idle)
         {
+            PlaySFX(_openShopClip);
             _actionState = PlayerActionState.Shop;
             _hints[_actionState].SetActive(false);
             _shopPlane.SetActive(true);
         }
         else if (_actionState == PlayerActionState.Shop)
         {
+            PlaySFX(_openShopClip);
             _actionState = PlayerActionState.Idle;
             _shopPlane.SetActive(false);
         }
@@ -401,14 +404,14 @@ public class GameManager : MonoBehaviour
         {
             // ��������� ���� �� -700 �� -2.5
             float clamped = Mathf.Clamp(y, -700f, -2.5f);
-            
+
             // ����������� �� -700 (0) �� -2.5 (1)
-            var t = Mathf.InverseLerp(-2.5f, -700f,  clamped);
+            var t = Mathf.InverseLerp(-2.5f, -700f, clamped);
             lowpass = Mathf.Lerp(6000f, 250f, t);
             lightLowpass = Mathf.Lerp(1, 0.01f, t);
         }
         mainAudioMixer.SetFloat("Lowpass", lowpass);
-        sfxAudioMixer   .SetFloat("SFXLowpass", lowpass);
+        sfxAudioMixer.SetFloat("SFXLowpass", lowpass);
         globalLight.intensity = lightLowpass;
     }
 
