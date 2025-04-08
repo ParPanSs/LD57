@@ -134,6 +134,10 @@ public class GameManager : MonoBehaviour
         {
             ShopHandler();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            cutscene.SetActive(true);
+        }
     }
 
     [Button("LOSE TEST")]
