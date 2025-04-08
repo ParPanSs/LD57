@@ -3,12 +3,10 @@ using AYellowpaper.SerializedCollections;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +19,8 @@ public class GameManager : MonoBehaviour
     private const KeyCode SHOP_KEY_CODE = KeyCode.T;
     private const KeyCode CATCH_KEY_CODE = KeyCode.Space;
 
+    [SerializeField] private Light2D globalLight;
+    
     [SerializeField] private float _aimingSpeed;
     [SerializeField] private Slider _aimingSlider;
     [SerializeField] private Slider _mainVolumeSlider;
@@ -391,22 +391,25 @@ public class GameManager : MonoBehaviour
     public void SetLowpassForMixers(float y)
     {
         float lowpass;
+        float lightLowpass;
         if (y > -2.5f)
         {
+            lightLowpass = 1;
             lowpass = 22000;
         }
         else
         {
             // ��������� ���� �� -700 �� -2.5
             float clamped = Mathf.Clamp(y, -700f, -2.5f);
-
+            
             // ����������� �� -700 (0) �� -2.5 (1)
             var t = Mathf.InverseLerp(-2.5f, -700f,  clamped);
             lowpass = Mathf.Lerp(6000f, 250f, t);
-
+            lightLowpass = Mathf.Lerp(1, 0.01f, t);
         }
         mainAudioMixer.SetFloat("Lowpass", lowpass);
         sfxAudioMixer   .SetFloat("SFXLowpass", lowpass);
+        globalLight.intensity = lightLowpass;
     }
 
     public void PlaySFX(AudioClip audioClip)
