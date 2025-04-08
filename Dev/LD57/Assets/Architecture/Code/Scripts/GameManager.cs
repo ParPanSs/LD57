@@ -302,6 +302,14 @@ public class GameManager : MonoBehaviour
                         item.SetActive(true);
                     }
                 }
+
+                if (type == CatchableObjectType.Garbage && isEndlessMode)
+                {
+                    hp--;
+                    hooksHp[hp].color = new Color32(0, 0, 0, 200);
+                    if (isEndlessMode && hp <= 0) Lose();
+                }
+
                 break;
             default:
                 break;
