@@ -28,6 +28,7 @@ public class FaderController : MonoBehaviour
     {
         SetFader();
         yield return new WaitForSeconds(1.5f);
+        animator.ResetTrigger("Fader");
         SceneManager.LoadScene(value);
     }
 }
