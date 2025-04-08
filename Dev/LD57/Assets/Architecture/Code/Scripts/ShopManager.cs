@@ -7,6 +7,7 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] private UpgradeInfo upgradeInfo;
     [SerializeField] private Animator _merchantAnimator;
+    [SerializeField] private AudioClip _merchantOnBuyClip;
 
     [SerializeField] private List<UpgradeContainer> upgradeContainers;
 
@@ -42,6 +43,7 @@ public class ShopManager : MonoBehaviour
         if (info.Count > container.CurrentLevel + 1 && GameManager.Instance.ScoreManager.Coin>= price)
         {
             _merchantAnimator.SetTrigger("Buy");
+            GameManager.Instance.PlaySFX(_merchantOnBuyClip);
             GameManager.Instance.ScoreManager.DecreaseGold(price);
             container.CurrentLevel += 1; 
             UpdateInfo();
