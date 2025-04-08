@@ -214,13 +214,14 @@ public class Fish : Catchable
             fishParameters.animators[fishStatus.fishId].SetTrigger("IsBaited");
             _actionType = ActionType.Detected;
         }
-        _detectedHook.isDetected = true;
+        if (fishStatus.fishId != FishId.GoldenFish) _detectedHook.isDetected = true;
     }
 
     public void UndetectHook()
     {
         if (_actionType == ActionType.Detected)
         {
+            _detectedHook.isDetected = false;
             _detectedHook = null;
             fishParameters.animators[fishStatus.fishId].SetTrigger("Idle");
             _actionType = ActionType.Waiting;

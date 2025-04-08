@@ -25,17 +25,17 @@ MonoBehaviour:
       - currentStat: 1.5
         price: 500
       - currentStat: 1.7
-        price: 700
+        price: 1
       - currentStat: 1.8
-        price: 1000
+        price: 2
       - currentStat: 2
-        price: 1350
+        price: 3
       - currentStat: 2.1
-        price: 1700
+        price: 4
       - currentStat: 2.2
-        price: 2300
+        price: 5
       - currentStat: 2.4
-        price: 3000
+        price: 6
     - Key: 1
       Value:
       - currentStat: 1

@@ -4189,6 +4189,7 @@ MonoBehaviour:
   sfxAudioMixer: {fileID: 24100000, guid: 2a606385118391f40bf0810c37efb243, type: 2}
   mainAudioSlider: {fileID: 871337717}
   sfxAudioSlider: {fileID: 1899844798}
+  exitButton: {fileID: 830333934}
 --- !u!4 &2129080907
 Transform:
   m_ObjectHideFlags: 0

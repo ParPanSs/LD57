@@ -9,6 +9,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private AudioMixer sfxAudioMixer;
     [SerializeField] private Slider mainAudioSlider;
     [SerializeField] private Slider sfxAudioSlider;
+    [SerializeField] private GameObject exitButton;
+    
     private void Awake()
     {
         mainAudioSlider.value = -20;
@@ -17,6 +19,9 @@ public class MainMenuController : MonoBehaviour
         {
              endlessButton.interactable = false;
         }
+        #if UNITY_WEBGL
+            exitButton.SetActive(false);
+        #endif
     }
 
     public void PlayGame()
