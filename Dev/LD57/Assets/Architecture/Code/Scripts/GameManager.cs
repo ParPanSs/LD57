@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         apiConnector.GetPlayers();
         if (isFirstTimePlaying && isEndlessMode)
         {
+            _actionState = PlayerActionState.Pause;
             input.gameObject.SetActive(true);
         }
     }
@@ -89,6 +90,7 @@ public class GameManager : MonoBehaviour
     public void SetName()
     {
         _playerName = namePanel.text;
+        _actionState = PlayerActionState.Idle;
     }
 
     private void Update()

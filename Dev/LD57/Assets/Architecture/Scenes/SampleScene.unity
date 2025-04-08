@@ -379,7 +379,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 2a606385118391f40bf0810c37efb243, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.845
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -557,9 +557,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 508178333}
     m_Modifications:
+    - target: {fileID: 344391541498194731, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 637723300465917007, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
       propertyPath: m_Name
       value: StoryBackTile 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489088780864123585, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2272873458877854485, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
       propertyPath: m_LocalPosition.x
@@ -612,6 +620,10 @@ PrefabInstance:
     - target: {fileID: 6831723587771635287, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966228804852594217, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4473,7 +4485,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.5582453, y: 0.21136922}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4484,7 +4496,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 0.4457872, y: 0.45547724}
   m_EdgeRadius: 0
 --- !u!114 &545810383
 MonoBehaviour:
@@ -8377,6 +8389,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 508178333}
     m_Modifications:
+    - target: {fileID: 3822571665176234, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 344391541498194731, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 588083842419344578, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8384,6 +8404,10 @@ PrefabInstance:
     - target: {fileID: 637723300465917007, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
       propertyPath: m_Name
       value: StoryBackTile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489088780864123585, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2272873458877854485, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8437,6 +8461,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5918263190682237374, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6486655415820225494, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8444,6 +8472,14 @@ PrefabInstance:
     - target: {fileID: 6831723587771635287, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966228804852594217, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391106742092539831, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9261,6 +9297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoryBackTile 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1489088780864123585, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1687131981749646517, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -9309,9 +9349,17 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4179659591110782988, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4225970811241630549, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575821072928623049, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5666338101077987261, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
       propertyPath: m_Mesh
@@ -9320,6 +9368,14 @@ PrefabInstance:
     - target: {fileID: 6920216649200651632, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966228804852594217, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257838840537125735, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9720,13 +9776,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2455064842833268735, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3062384519217573051, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4179659591110782988, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575821072928623049, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6920216649200651632, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104060810834301383, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8654381744034656899, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
       propertyPath: m_Mesh
@@ -10556,9 +10628,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 508178333}
     m_Modifications:
+    - target: {fileID: 3822571665176234, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 637723300465917007, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
       propertyPath: m_Name
       value: StoryBackTile 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489088780864123585, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1687131981749646517, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
       propertyPath: m_Mesh
@@ -10608,6 +10688,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5575821072928623049, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5666338101077987261, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -10615,6 +10699,10 @@ PrefabInstance:
     - target: {fileID: 6486655415820225494, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966228804852594217, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11796,7 +11884,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1898549068}
   m_Direction: 0
   m_MinValue: 0.3
-  m_MaxValue: 1
+  m_MaxValue: 0.85
   m_WholeNumbers: 0
   m_Value: 0.3
   m_OnValueChanged:
@@ -13308,9 +13396,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 508178333}
     m_Modifications:
+    - target: {fileID: 344391541498194731, guid: 3c2667df91e4d44449e472fc3f1061b0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 637723300465917007, guid: 3c2667df91e4d44449e472fc3f1061b0, type: 3}
       propertyPath: m_Name
       value: StoryBackTile 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1585293914956096483, guid: 3c2667df91e4d44449e472fc3f1061b0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2272873458877854485, guid: 3c2667df91e4d44449e472fc3f1061b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14374,9 +14470,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 508178333}
     m_Modifications:
+    - target: {fileID: 3822571665176234, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 637723300465917007, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
       propertyPath: m_Name
       value: StoryBackTile 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1489088780864123585, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2272873458877854485, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14445,6 +14549,14 @@ PrefabInstance:
     - target: {fileID: 6486655415820225494, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6966228804852594217, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257838840537125735, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8258903175928107021, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
       propertyPath: m_Size.x
