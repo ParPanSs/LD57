@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
@@ -10,7 +9,6 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private AudioMixer sfxAudioMixer;
     [SerializeField] private Slider mainAudioSlider;
     [SerializeField] private Slider sfxAudioSlider;
-
     private void Awake()
     {
         mainAudioSlider.value = -20;
@@ -23,12 +21,12 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        FaderController.instance.FadeOut(1);
     }
 
     public void PlayEndless()
     {
-        SceneManager.LoadScene(2);
+        FaderController.instance.FadeOut(2);
         GameManager.isEndlessMode = true;
     }
     
@@ -46,4 +44,5 @@ public class MainMenuController : MonoBehaviour
     {
         Application.Quit();
     }
+    
 }

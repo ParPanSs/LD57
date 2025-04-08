@@ -170,25 +170,13 @@ public class GameManager : MonoBehaviour
         switch (value)
         {
             case 0: 
-                StartCoroutine(ToMainMenuTransition()); 
+                FaderController.instance.FadeOut(0);
                 break;
             case 1:
-                StartCoroutine(RestartScene());
+                FaderController.instance.FadeOut(2);
                 break;
         }
     }
-
-    private IEnumerator ToMainMenuTransition()
-    {
-        yield return new WaitUntil(() => isDataGot);
-        SceneManager.LoadScene(0);
-    }
-    private IEnumerator RestartScene()
-    {
-        yield return new WaitUntil(() => isDataGot);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-    
     
     private bool IsCatchableObjectOpened(CatchableObjectType catchableObjectType)
     {
@@ -396,7 +384,7 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene(0);
+        FaderController.instance.FadeOut(0);
     }
     #endregion
 
