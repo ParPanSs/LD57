@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void DecreaseGold(int value)
     {
-        GameManager.Instance.PlaySFX(changeGoldCount);
+        //GameManager.Instance.PlaySFX(changeGoldCount);
         StartCoroutine(UpdateCoinCounter(Coin, -value, false));
     }
 
