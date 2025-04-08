@@ -6,7 +6,7 @@ public class HookController : MonoBehaviour
     private const KeyCode RIGHT_KEY_CODE = KeyCode.D;
     private const string HOOK_TRIGGER = "Hook";
     private const string CATCH_TRIGGER = "Catch";
-     
+
     [SerializeField] private SpriteRenderer _activeBait;
     [SerializeField] private GameObject _hookingHint;
     [SerializeField] private Animator _playerAnimator;
@@ -20,7 +20,7 @@ public class HookController : MonoBehaviour
     private float _xFactor = 0f;
     private float _shakingTime = 0.3f;
     private float _speed;
-    private bool _isAnimated; 
+    private bool _isAnimated;
     private Transform _cameraTransform;
     private Catchable _catchedObject;
     private BaitId _baitId;
@@ -28,7 +28,7 @@ public class HookController : MonoBehaviour
 
     private void Start()
     {
-        _startLocalPosition = transform.localPosition; 
+        _startLocalPosition = transform.localPosition;
         _baitId = BaitId.Empty;
         SetBait(_baitId);
         _cameraTransform = Camera.main.transform;
@@ -38,7 +38,7 @@ public class HookController : MonoBehaviour
     {
         _baitId = baitId;
         _activeBait.enabled = (baitId != BaitId.Empty);
-        
+
         if (baitId != BaitId.Empty) _activeBait.sprite = GameManager.Instance.BaitManager.GetBaitSprite(baitId);
     }
 
@@ -56,14 +56,14 @@ public class HookController : MonoBehaviour
     public void StartHooking(float speed)
     {
         _isAnimated = true;
-        _speed = speed; 
+        _speed = speed;
         _playerAnimator.SetTrigger(HOOK_TRIGGER);
         LeanTween.delayedCall(0.4f, () =>
         {
             GameManager.Instance.PlaySFX(_hookClip);
-            LeanTween.moveY(_cameraTransform.parent.gameObject, _cameraTransform.parent.position.y + _cameraParentOffset, 0.5f).setOnComplete(()=>
-            {  
-                });
+            LeanTween.moveY(_cameraTransform.parent.gameObject, _cameraTransform.parent.position.y + _cameraParentOffset, 0.5f).setOnComplete(() =>
+            {
+            });
 
             _startCatchPosition = transform.position;
             transform.rotation = Quaternion.Euler(Vector3.forward * -110);
@@ -84,12 +84,15 @@ public class HookController : MonoBehaviour
         });
     }
     private void ReturnCamera()
-    { 
-        LeanTween.moveY(_cameraTransform.parent.gameObject, 0, 0.3f); 
+    {
+        LeanTween.moveY(_cameraTransform.parent.gameObject, 0, 0.3f);
     }
     private void StopCatching()
     {
-        _activeBait.enabled = true;
+        if (_baitId != BaitId.Empty)
+        {
+            _activeBait.enabled = true;
+        }
         GameManager.Instance.PlaySFX(_hookClip);
         GameManager.Instance.StopCatching(_catchedObject);
         transform.localPosition = _startLocalPosition;
@@ -98,11 +101,11 @@ public class HookController : MonoBehaviour
         {
             Destroy(_catchedObject.gameObject);
             _catchedObject = null;
-        } 
+        }
         _playerAnimator.SetTrigger(CATCH_TRIGGER);
 
         // LeanTween.moveSpline(gameObject, vectors, 0.8f);
-    } 
+    }
     private void FixedUpdate()
     {
         if (!_isAnimated)
@@ -119,7 +122,7 @@ public class HookController : MonoBehaviour
                 var newPosition = transform.position;
                 newPosition += moveDirection * Time.deltaTime * _speed * _mainSpeed * GameManager.Instance.SpeedStat;
                 newPosition.x = Mathf.Clamp(newPosition.x, -15, 15);
-                
+
                 {
                     _cameraTransform.localPosition = Vector3.up * transform.position.y;
                 }
@@ -136,7 +139,7 @@ public class HookController : MonoBehaviour
                 var deepFactor = -((transform.position.y / 20));
                 deepFactor = Mathf.Max(1f, deepFactor);
                 transform.position += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
-                 
+
                 {
                     _cameraTransform.localPosition += direction * (deepFactor * _mainSpeed) * Time.deltaTime;
                 }
@@ -186,8 +189,8 @@ public class HookController : MonoBehaviour
             if (canCatch)
             {
                 _catchedObject = catchable;
-                 
-                    catchable.OnHook(); 
+
+                catchable.OnHook();
                 _catchedObject.transform.SetParent(parent);
                 _catchedObject.transform.localPosition = pos;
             }
