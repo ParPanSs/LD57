@@ -6,8 +6,7 @@ public class HookController : MonoBehaviour
     private const KeyCode RIGHT_KEY_CODE = KeyCode.D;
     private const string HOOK_TRIGGER = "Hook";
     private const string CATCH_TRIGGER = "Catch";
-
-    [SerializeField] private Transform[] _startHookingAnimPos;
+     
     [SerializeField] private SpriteRenderer _activeBait;
     [SerializeField] private GameObject _hookingHint;
     [SerializeField] private Animator _playerAnimator;
@@ -38,6 +37,9 @@ public class HookController : MonoBehaviour
     public void SetBait(BaitId baitId)
     {
         _baitId = baitId;
+        _activeBait.gameObject.SetActive(baitId != BaitId.Empty);
+        
+
         _activeBait.sprite = GameManager.Instance.BaitManager.GetBaitSprite(baitId);
     }
 
@@ -55,12 +57,7 @@ public class HookController : MonoBehaviour
     public void StartHooking(float speed)
     {
         _isAnimated = true;
-        _speed = speed;
-        Vector3[] vectors = new Vector3[_startHookingAnimPos.Length];
-        for (int i = 0; i < _startHookingAnimPos.Length; i++)
-        {
-            vectors[i] = _startHookingAnimPos[i].position;
-        }
+        _speed = speed; 
         _playerAnimator.SetTrigger(HOOK_TRIGGER);
         LeanTween.delayedCall(0.4f, () =>
         {
@@ -100,19 +97,12 @@ public class HookController : MonoBehaviour
         {
             Destroy(_catchedObject.gameObject);
             _catchedObject = null;
-        }
-        Vector3[] vectors = new Vector3[_startHookingAnimPos.Length];
-        for (int i = 0; i < _startHookingAnimPos.Length; i++)
-        {
-            vectors[i] = _startHookingAnimPos[_startHookingAnimPos.Length - (i + 1)].position;
-
-        }
+        } 
         _playerAnimator.SetTrigger(CATCH_TRIGGER);
 
         // LeanTween.moveSpline(gameObject, vectors, 0.8f);
-    }
-
-    private void Update()
+    } 
+    private void FixedUpdate()
     {
         if (!_isAnimated)
         {

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2272873458877854485}
-  - component: {fileID: 6464345552852021156}
   - component: {fileID: 1936577578304302299}
+  - component: {fileID: 6464345552852021156}
   m_Layer: 0
   m_Name: StoryBackTile
   m_TagString: Tile
@@ -52,27 +52,6 @@ Transform:
   - {fileID: 4032269295123724647}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6464345552852021156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637723300465917007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 719d8979ba78c674a897bf49e6fd2640, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnContainers:
-  - minY_Point: {fileID: 944537239039418683}
-    maxY_Point: {fileID: 8640539894306344392}
-  - minY_Point: {fileID: 2318547102657136398}
-    maxY_Point: {fileID: 6462904653889802138}
-  - minY_Point: {fileID: 2318547102657136398}
-    maxY_Point: {fileID: 6462904653889802138}
-  - minY_Point: {fileID: 5958439898176689746}
-    maxY_Point: {fileID: 1964348934466288419}
 --- !u!61 &1936577578304302299
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -118,6 +97,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 44.008343, y: 103.19064}
   m_EdgeRadius: 0
+--- !u!114 &6464345552852021156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637723300465917007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719d8979ba78c674a897bf49e6fd2640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnContainers:
+  - minY_Point: {fileID: 944537239039418683}
+    maxY_Point: {fileID: 8640539894306344392}
+  - minY_Point: {fileID: 2318547102657136398}
+    maxY_Point: {fileID: 6462904653889802138}
+  - minY_Point: {fileID: 2318547102657136398}
+    maxY_Point: {fileID: 6462904653889802138}
+  - minY_Point: {fileID: 5958439898176689746}
+    maxY_Point: {fileID: 1964348934466288419}
 --- !u!1 &2884067459224603593
 GameObject:
   m_ObjectHideFlags: 0

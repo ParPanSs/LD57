@@ -408,6 +408,7 @@ public class GameManager : MonoBehaviour
 
     public void PlaySFX(AudioClip audioClip)
     {
+        if (audioClip == null) return;
         _sfxVolumeSource.pitch = Random.Range(0.95f, 1.05f);
         _sfxVolumeSource.clip = audioClip;
         _sfxVolumeSource.Play();
