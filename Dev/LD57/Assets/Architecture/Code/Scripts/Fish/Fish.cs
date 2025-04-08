@@ -122,6 +122,11 @@ public class Fish : Catchable
 
                 break;
             case ActionType.Detected:
+                if (_detectedHook.isDetected && fishStatus.fishId == FishId.GoldenFish)
+                {
+                    UndetectHook();
+                    return;
+                }
                 if (_detectedHook.transform.position.y > -2 || _detectedHook.IsCatched())
                 {
                     UndetectHook();
@@ -171,7 +176,6 @@ public class Fish : Catchable
 
     public bool TryToHook(BaitId baitId)
     {
-
         if (_actionType == ActionType.Hooked || _actionType == ActionType.Hitting )
         {
             return false;
@@ -210,6 +214,7 @@ public class Fish : Catchable
             fishParameters.animators[fishStatus.fishId].SetTrigger("IsBaited");
             _actionType = ActionType.Detected;
         }
+        _detectedHook.isDetected = true;
     }
 
     public void UndetectHook()

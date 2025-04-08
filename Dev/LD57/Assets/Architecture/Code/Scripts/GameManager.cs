@@ -92,8 +92,10 @@ public class GameManager : MonoBehaviour
 
     public void SetName()
     {
+        if (namePanel.text == string.Empty) return;
         _playerName = namePanel.text;
         _actionState = PlayerActionState.Idle;
+        namePanel.gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     private void Update()

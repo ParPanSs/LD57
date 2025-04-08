@@ -26,6 +26,8 @@ public class HookController : MonoBehaviour
     private BaitId _baitId;
     public BaitId BaitId => _baitId;
 
+    public bool isDetected;
+
     private void Start()
     {
         _startLocalPosition = transform.localPosition; 
