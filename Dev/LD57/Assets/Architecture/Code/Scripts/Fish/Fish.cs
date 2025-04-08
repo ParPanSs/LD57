@@ -29,7 +29,7 @@ public class Fish : Catchable
     private HookController _detectedHook;
     public FishStatus fishStatus;
     
-    private Quaternion _targetRotation;
+    private Vector3 _targetScale;
     private Quaternion _startRotation;
     private float _rotationDuration = 0.5f;
     private float _rotationTimer = 0f;
@@ -93,8 +93,8 @@ public class Fish : Catchable
                 if (Mathf.Abs(direction.x) > 0.01f)
                 {
                     float signOfDirection = Mathf.Sign(direction.x);
-                    float targetYAngle = signOfDirection < 0f ? 0f : 180f;
-                    _targetRotation = Quaternion.Euler(0f, targetYAngle, 0f);
+                    float targetYAngle = signOfDirection < 0f ? 1f : -1f;
+                    _targetScale = new Vector3(targetYAngle,1,1);
                     _rotationTimer = 0f;
                     _isRotating = true;
                 }
@@ -103,7 +103,7 @@ public class Fish : Catchable
                 {
                     _rotationTimer += Time.deltaTime;
                     float d = Mathf.Clamp01(_rotationTimer / _rotationDuration);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, d);
+                    transform.localScale = Vector3.Slerp(transform.localScale, _targetScale, d);
 
                     if (d >= 1f)
                     {
@@ -155,7 +155,7 @@ public class Fish : Catchable
         if (Mathf.Abs(direction.x) > 0.01f)
         {
             float sign = Mathf.Sign(direction.x);
-            _targetRotation = Quaternion.Euler(0f, sign < 0f ? 180f : 0f, 0f);
+            _targetScale = new Vector3(sign < 0f ? -0 : 1f, 1f, 1);
         }
 
         _fromPosition = transform.position;
@@ -178,7 +178,7 @@ public class Fish : Catchable
         }
         if (fishStatus.needBait && baitId == fishStatus.baitId || fishStatus.baitId == BaitId.Empty)
         {
-        transform.rotation = _startRotation;
+            //transform.localScale = _startRotation;
             fishParameters.animators[fishStatus.fishId].SetTrigger("OnTheHook");
             _actionType = ActionType.Hooked;
             float sign = Mathf.Sign(transform.localScale.x); 

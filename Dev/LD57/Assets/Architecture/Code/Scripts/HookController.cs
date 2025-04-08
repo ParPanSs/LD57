@@ -37,7 +37,7 @@ public class HookController : MonoBehaviour
     public void SetBait(BaitId baitId)
     {
         _baitId = baitId;
-        _activeBait.gameObject.SetActive(baitId != BaitId.Empty);
+        _activeBait.enabled = (baitId != BaitId.Empty);
         
 
         _activeBait.sprite = GameManager.Instance.BaitManager.GetBaitSprite(baitId);
