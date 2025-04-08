@@ -39,8 +39,7 @@ public class HookController : MonoBehaviour
         _baitId = baitId;
         _activeBait.enabled = (baitId != BaitId.Empty);
         
-
-        _activeBait.sprite = GameManager.Instance.BaitManager.GetBaitSprite(baitId);
+        if (baitId != BaitId.Empty) _activeBait.sprite = GameManager.Instance.BaitManager.GetBaitSprite(baitId);
     }
 
     public bool IsCatched()
@@ -75,7 +74,7 @@ public class HookController : MonoBehaviour
 
     public void StartCatching()
     {
-        _activeBait.enabled = false;
+        if (IsCatched()) _activeBait.enabled = false;
         _hookingHint.SetActive(false);
         _xFactor = 0;
         _isAnimated = true;

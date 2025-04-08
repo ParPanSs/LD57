@@ -67,6 +67,9 @@ public class GameManager : MonoBehaviour
     private string _playerName;
     private int _fishCaught;
 
+    [SerializeField] private List<Image> hooksHp;
+    private int hp = 3;
+
     private void Awake()
     {
         Instance = this;
@@ -237,11 +240,7 @@ public class GameManager : MonoBehaviour
             _hookController.StartCatching();
         }
 
-        var caughtObject = _hookController.GetCatchedObject() as Fish;
-        if (caughtObject)
-        {
-            if (isEndlessMode && !_roundManager.RightFish(caughtObject.fishStatus.fishId)) Lose();
-        }
+        
     }
 
     public void StopCatching(Catchable catchable)
@@ -269,6 +268,9 @@ public class GameManager : MonoBehaviour
                 {
                     if (!_roundManager.RightFish(fish.fishStatus.fishId))
                     {
+                        hp--;
+                        hooksHp[hp].color = new Color32(0, 0, 0, 128); 
+                        if (isEndlessMode && hp <= 0) Lose();
                         return;
                     }
                     else
