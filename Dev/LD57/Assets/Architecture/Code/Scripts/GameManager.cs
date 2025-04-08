@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RoundManager _roundManager;
     [SerializeField] private ApiConnector apiConnector;
     [SerializeField] private List<GameObject> tails;
-    [SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
+    //[SerializeField] private SerializedDictionary<PlayerActionState, GameObject> _hints;
     [SerializeField] private SerializedDictionary<CatchableObjectType, List<GameObject>> _catchedObjects;
 
     public List<GameObject> Tails => tails;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     private PlayerActionState _actionState;
     public PlayerActionState ActionState => _actionState;
     public static bool isEndlessMode;
-    public bool isFirstTimePlaying = true;
+    public static bool isFirstTimePlaying = true;
     public bool isDataGot;
     private string _playerName;
     private int _fishCaught;
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
     {
         _aimingSlider.gameObject.SetActive(true);
         _actionState = PlayerActionState.Aiming;
-        _hints[_actionState].SetActive(false);
+        //_hints[_actionState].SetActive(false);
         _aimingSlider.value = _aimingSlider.minValue;
     }
     private void Aiming()
@@ -215,7 +215,7 @@ public class GameManager : MonoBehaviour
     {
         _aimingSlider.gameObject.SetActive(false);
         _actionState = PlayerActionState.Hooking;
-        _hints[_actionState].SetActive(false);
+        //_hints[_actionState].SetActive(false);
         _hookController.StartHooking(_aimingSlider.value);
     }
     #endregion
@@ -311,7 +311,7 @@ public class GameManager : MonoBehaviour
         {
             PlaySFX(_openBucketClip);
             _actionState = PlayerActionState.SelectingBait;
-            _hints[_actionState].SetActive(false);
+            //_hints[_actionState].SetActive(false);
             _baitManager.ToggleBaitsPanelActive(true);
         }
         else if (_actionState == PlayerActionState.SelectingBait)
@@ -338,7 +338,7 @@ public class GameManager : MonoBehaviour
         {
             PlaySFX(_openBookClip);
             _actionState = PlayerActionState.Reading;
-            _hints[_actionState].SetActive(false);
+            //_hints[_actionState].SetActive(false);
             _bookPlane.SetActive(true);
         }
         else if (_actionState == PlayerActionState.Reading)
@@ -358,7 +358,7 @@ public class GameManager : MonoBehaviour
         {
             PlaySFX(_openShopClip);
             _actionState = PlayerActionState.Shop;
-            _hints[_actionState].SetActive(false);
+            //_hints[_actionState].SetActive(false);
             _shopPlane.SetActive(true);
         }
         else if (_actionState == PlayerActionState.Shop)

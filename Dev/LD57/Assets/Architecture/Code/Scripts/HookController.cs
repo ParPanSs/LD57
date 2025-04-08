@@ -75,6 +75,7 @@ public class HookController : MonoBehaviour
 
     public void StartCatching()
     {
+        _activeBait.enabled = false;
         _hookingHint.SetActive(false);
         _xFactor = 0;
         _isAnimated = true;
@@ -89,6 +90,7 @@ public class HookController : MonoBehaviour
     }
     private void StopCatching()
     {
+        _activeBait.enabled = true;
         GameManager.Instance.PlaySFX(_hookClip);
         GameManager.Instance.StopCatching(_catchedObject);
         transform.localPosition = _startLocalPosition;
