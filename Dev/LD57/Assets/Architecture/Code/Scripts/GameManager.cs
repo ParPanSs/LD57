@@ -275,6 +275,7 @@ public class GameManager : MonoBehaviour
                     {
                         _roundManager.SetNewFish();
                     }
+                    _scoreManager.IncreaseGold((int)(300));
                 }
                 else
                 {
@@ -283,8 +284,8 @@ public class GameManager : MonoBehaviour
                         PlayerPrefs.SetInt("isAnglerCatched", 1);
                         cutscene.SetActive(true);
                     }
+                    _scoreManager.IncreaseGold((int)(fish.fishStatus.goldReward * FishPriceStat));
                 }
-                _scoreManager.IncreaseGold((int)(fish.fishStatus.goldReward * FishPriceStat));
                 _scoreManager.IncreaseScore(fish.fishStatus.scoreReward);
                 _fishCaught++;
                 break;

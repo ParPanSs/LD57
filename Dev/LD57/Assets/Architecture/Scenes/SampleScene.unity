@@ -10203,18 +10203,6 @@ MonoBehaviour:
   apiConnector: {fileID: 1158961109}
   tails:
   - {fileID: 3049279548111575380}
-  _hints:
-    _serializedList:
-    - Key: 1
-      Value: {fileID: 801709876}
-    - Key: 2
-      Value: {fileID: 634886517}
-    - Key: 4
-      Value: {fileID: 1404166925}
-    - Key: 5
-      Value: {fileID: 518582390}
-    - Key: 6
-      Value: {fileID: 1072688112}
   _catchedObjects:
     _serializedList:
     - Key: 1
@@ -10229,7 +10217,6 @@ MonoBehaviour:
       Value:
       - {fileID: 330404045}
       - {fileID: 1072688112}
-  isFirstTimePlaying: 1
   isDataGot: 0
 --- !u!4 &1353484355
 Transform:

@@ -28,9 +28,9 @@ MonoBehaviour:
         price: 700
       - currentStat: 1.8
         price: 1000
-      - currentStat: 1.9
-        price: 1350
       - currentStat: 2
+        price: 1350
+      - currentStat: 2.1
         price: 1700
       - currentStat: 2.2
         price: 2300
