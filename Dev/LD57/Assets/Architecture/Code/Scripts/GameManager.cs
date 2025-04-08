@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Slider _mainVolumeSlider;
     [SerializeField] private Slider _sfxVolumeSlider;
     [SerializeField] private TMP_InputField namePanel;
+    [SerializeField] private AudioSource _mainVolumeSource;
+    [SerializeField] private AudioSource _sfxVolumeSource;
+    [SerializeField] private AudioClip _openBookClip;
+    [SerializeField] private AudioClip _openBucketClip;
+    [SerializeField] private AudioClip _openShopClip;
     [SerializeField] private AudioMixer mainAudioMixer;
     [SerializeField] private AudioMixer sfxAudioMixer;
     [SerializeField] private GameObject _bookPlane;
@@ -297,6 +302,7 @@ public class GameManager : MonoBehaviour
     #region Bait Methods
     private void BaitHandler()
     {
+        PlaySFX(_openBucketClip);
         if (_actionState == PlayerActionState.Idle)
         {
             _actionState = PlayerActionState.SelectingBait;
@@ -322,6 +328,7 @@ public class GameManager : MonoBehaviour
 
     private void BookHandler()
     {
+        PlaySFX(_openBookClip);
         if (_actionState == PlayerActionState.Idle)
         {
             _actionState = PlayerActionState.Reading;
@@ -340,6 +347,7 @@ public class GameManager : MonoBehaviour
 
     private void ShopHandler()
     {
+        PlaySFX(_openShopClip); 
         if (_actionState == PlayerActionState.Idle)
         {
             _actionState = PlayerActionState.Shop;
@@ -397,8 +405,17 @@ public class GameManager : MonoBehaviour
         mainAudioMixer.SetFloat("Lowpass", lowpass);
         sfxAudioMixer   .SetFloat("SFXLowpass", lowpass);
     }
+
+    public void PlaySFX(AudioClip audioClip)
+    {
+        _sfxVolumeSource.pitch = Random.Range(0.95f, 1.05f);
+        _sfxVolumeSource.clip = audioClip;
+        _sfxVolumeSource.Play();
+    }
     private void CancelHandle()
     {
+        PlaySFX(_openBookClip);
+
         switch (_actionState)
         {
             case PlayerActionState.Idle:

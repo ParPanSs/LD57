@@ -1788,6 +1788,7 @@ MonoBehaviour:
   _activeBait: {fileID: 219084625}
   _hookingHint: {fileID: 680337400}
   _playerAnimator: {fileID: 0}
+  _hookClip: {fileID: 0}
   _cameraParentOffset: 0
 --- !u!50 &255437941
 Rigidbody2D:
@@ -3141,6 +3142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeInfo: {fileID: 11400000, guid: f3e03b2d632482b458559890362d9193, type: 2}
   _merchantAnimator: {fileID: 330404048}
+  _merchantOnBuyClip: {fileID: 8300000, guid: b6c92ab6538e7ae4aa0fba3e9af01096, type: 3}
   upgradeContainers:
   - upgradeType: 0
     currentStatText: {fileID: 7095214190721624060}
@@ -4402,6 +4404,7 @@ MonoBehaviour:
   _activeBait: {fileID: 966907638}
   _hookingHint: {fileID: 680337400}
   _playerAnimator: {fileID: 962937140}
+  _hookClip: {fileID: 8300000, guid: 0714bf6ce72216843aa698d229c244cd, type: 3}
   _cameraParentOffset: -5
 --- !u!114 &545810384
 MonoBehaviour:
@@ -5300,6 +5303,7 @@ MonoBehaviour:
   coinImage: {fileID: 1074392878}
   coinPrefab: {fileID: 6189081180934170906, guid: d29dc8e94378cf1449546030821f9b70, type: 3}
   spawnPosition: {fileID: 37055435}
+  changeGoldCount: {fileID: 8300000, guid: f59f5161a5a955f44b8bb3bddc39a831, type: 3}
 --- !u!4 &702505487
 Transform:
   m_ObjectHideFlags: 0
@@ -9444,6 +9448,11 @@ MonoBehaviour:
   _mainVolumeSlider: {fileID: 271734532}
   _sfxVolumeSlider: {fileID: 417898793}
   namePanel: {fileID: 484719381}
+  _mainVolumeSource: {fileID: 1355685768}
+  _sfxVolumeSource: {fileID: 49135010}
+  _openBookClip: {fileID: 8300000, guid: fd278d2f931d4294ca57d8baa3ca4267, type: 3}
+  _openBucketClip: {fileID: 8300000, guid: fd278d2f931d4294ca57d8baa3ca4267, type: 3}
+  _openShopClip: {fileID: 8300000, guid: fd278d2f931d4294ca57d8baa3ca4267, type: 3}
   mainAudioMixer: {fileID: 24100000, guid: 7c09016d4d6cedc499f65a9718e6cda5, type: 2}
   sfxAudioMixer: {fileID: 24100000, guid: 2a606385118391f40bf0810c37efb243, type: 2}
   _bookPlane: {fileID: 240780572}

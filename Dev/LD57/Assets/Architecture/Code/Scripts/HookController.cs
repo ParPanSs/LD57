@@ -11,6 +11,7 @@ public class HookController : MonoBehaviour
     [SerializeField] private SpriteRenderer _activeBait;
     [SerializeField] private GameObject _hookingHint;
     [SerializeField] private Animator _playerAnimator;
+    [SerializeField] private AudioClip _hookClip;
 
     private Vector3 _startCatchPosition;
     private Vector3 _startLocalPosition;
@@ -62,7 +63,8 @@ public class HookController : MonoBehaviour
         }
         _playerAnimator.SetTrigger(HOOK_TRIGGER);
         LeanTween.delayedCall(0.4f, () =>
-        { 
+        {
+            GameManager.Instance.PlaySFX(_hookClip);
             LeanTween.moveY(_cameraTransform.parent.gameObject, _cameraTransform.parent.position.y + _cameraParentOffset, 0.5f).setOnComplete(()=>
             {  
                 });
@@ -93,7 +95,7 @@ public class HookController : MonoBehaviour
         GameManager.Instance.StopCatching(_catchedObject);
         transform.localPosition = _startLocalPosition;
         transform.localRotation = Quaternion.Euler(Vector3.forward * -24.38f);
-
+        GameManager.Instance.PlaySFX(_hookClip);
         if (_catchedObject != null)
         {
             Destroy(_catchedObject.gameObject);

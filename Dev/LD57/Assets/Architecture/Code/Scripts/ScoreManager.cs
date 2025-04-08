@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject coinImage;
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private Transform spawnPosition;
-
+    [SerializeField] private AudioClip changeGoldCount;
     public int Coin { get; private set; }
     public int Score { get; private set; }
 
@@ -22,6 +22,7 @@ public class ScoreManager : MonoBehaviour
 
     public void IncreaseGold(int value)
     {
+        GameManager.Instance.PlaySFX(changeGoldCount);
         var coin = Instantiate(coinPrefab, spawnPosition.position, Quaternion.identity);
         LeanTween.moveLocal(coin, coinImage.transform.position, .5f).setOnComplete(() =>
         {
@@ -33,6 +34,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void DecreaseGold(int value)
     {
+        GameManager.Instance.PlaySFX(changeGoldCount);
         StartCoroutine(UpdateCoinCounter(Coin, -value, false));
     }
 
