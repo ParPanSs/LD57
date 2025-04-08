@@ -5608,7 +5608,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_Sprite: {fileID: -1325184810, guid: 1114a251bad86f74fa4fca18f22c1379, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3529412}
   m_FlipX: 0
@@ -6665,6 +6665,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abaadda56345e74ca328b736a32fc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tailsToSpawn:
+  - {fileID: 637723300465917007, guid: c9d2e89f053251949ad725bf4978ec67, type: 3}
+  - {fileID: 637723300465917007, guid: dd34b1a80f370f7479580280310d4c4f, type: 3}
+  - {fileID: 637723300465917007, guid: aff69e524acf69c4897d9f6571eb5504, type: 3}
+  - {fileID: 637723300465917007, guid: eaed81d1b15543540b270cb0579b232a, type: 3}
+  - {fileID: 637723300465917007, guid: 3c2667df91e4d44449e472fc3f1061b0, type: 3}
+  - {fileID: 637723300465917007, guid: 3e5302623dc03b14ca9a9c29d09a1806, type: 3}
+  - {fileID: 637723300465917007, guid: c4974faba6f37bf4d8aa2ba2c795d8a3, type: 3}
 --- !u!50 &1009725314
 Rigidbody2D:
   serializedVersion: 4
@@ -8607,6 +8615,7 @@ MonoBehaviour:
   _pausePanel: {fileID: 413996790}
   highScorePanel: {fileID: 1598159172}
   highScoreSpawnPoint: {fileID: 2069090993}
+  cutscene: {fileID: 0}
   playerInPanel: {fileID: 3158856094454751856, guid: dc79ebd8f2747b547bde85bfe3e9e26f, type: 3}
   input: {fileID: 341960121}
   _hookController: {fileID: 545810383}

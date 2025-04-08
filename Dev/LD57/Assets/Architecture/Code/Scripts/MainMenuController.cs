@@ -15,9 +15,9 @@ public class MainMenuController : MonoBehaviour
     {
         mainAudioSlider.value = -20;
         sfxAudioSlider.value = -20;
-        if (!GameManager.isAnglerCatched)
+        if (PlayerPrefs.GetInt("isAnglerCatched") == 0)
         {
-            //endlessButton.interactable = false;
+             endlessButton.interactable = false;
         }
     }
 

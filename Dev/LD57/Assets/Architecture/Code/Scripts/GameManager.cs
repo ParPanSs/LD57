@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private GameObject highScorePanel;
     [SerializeField] private GameObject highScoreSpawnPoint;
+    [SerializeField] private GameObject cutscene;
     [SerializeField] private GameObject playerInPanel;
     [SerializeField] private GameObject input;
     [SerializeField] private HookController _hookController;
@@ -59,8 +60,7 @@ public class GameManager : MonoBehaviour
     public float FishPriceStat { get; set; }
 
     private PlayerActionState _actionState;
-    public PlayerActionState ActionState => _actionState;
-    public static bool isAnglerCatched;
+    public PlayerActionState ActionState => _actionState; 
     public static bool isEndlessMode;
     public bool isFirstTimePlaying = true;
     public bool isDataGot;
@@ -274,14 +274,29 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case CatchableType.Fish:
-                if (isEndlessMode && !_roundManager.RightFish((catchable as Fish).fishStatus.fishId)) return;
-                _scoreManager.IncreaseGold((int)((catchable as Fish).fishStatus.goldReward * FishPriceStat));
-                _scoreManager.IncreaseScore((catchable as Fish).fishStatus.scoreReward);
-                _fishCaught++;
-                if (isEndlessMode && _roundManager.RightFish((catchable as Fish).fishStatus.fishId))
+                var fish = catchable as Fish;
+                if (isEndlessMode) 
                 {
-                    _roundManager.SetNewFish();
+                    if (!_roundManager.RightFish(fish.fishStatus.fishId))
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        _roundManager.SetNewFish(); 
+                    }
                 }
+                else
+                {
+                    if(fish.fishStatus.fishId == FishId.Angler)
+                    {
+                        PlayerPrefs.SetInt("isAnglerCatched", 1);
+                        cutscene.SetActive(true);
+                    }
+                }
+                _scoreManager.IncreaseGold((int)(fish.fishStatus.goldReward * FishPriceStat));
+                _scoreManager.IncreaseScore(fish.fishStatus.scoreReward);
+                _fishCaught++; 
                 break;
             case CatchableType.Object:
                 var type = (catchable as CatchableObject).CatchableObjectType;
