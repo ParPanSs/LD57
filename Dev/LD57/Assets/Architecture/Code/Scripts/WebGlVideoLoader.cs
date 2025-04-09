@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -8,19 +9,20 @@ public class WebGlVideoLoader : MonoBehaviour
     public VideoPlayer videoPlayer;
   //  public  VideoClip videoClip;
 
-    void Start()
+    private void Start()
     {
 //#if UNITY_WEBGL
         videoPlayer.source = VideoSource.Url;
         videoPlayer.url = Application.streamingAssetsPath + "/Titles.mp4"; 
  //#endif
-
-        videoPlayer.audioOutputMode = VideoAudioOutputMode.None; // временно убираем звук, если нужен
-        videoPlayer.prepareCompleted += OnPrepared;
-        videoPlayer.Prepare();
+      //  videoPlayer.Play();
+        //
+        videoPlayer.audioOutputMode = VideoAudioOutputMode.None; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+         videoPlayer.prepareCompleted += OnPrepared;
+         videoPlayer.Prepare();
     }
 
-    void OnPrepared(VideoPlayer vp)
+    private void OnPrepared(VideoPlayer vp)
     {
        // vp.Play();
     }
