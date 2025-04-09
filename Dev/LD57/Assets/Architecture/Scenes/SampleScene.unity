@@ -9232,7 +9232,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1297478127}
   - component: {fileID: 1297478128}
-  - component: {fileID: 1297478129}
   m_Layer: 0
   m_Name: VideoClip
   m_TagString: Untagged
@@ -9263,7 +9262,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1297478126}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: d7142a53d9f68b14785f3dc3ba403cbc, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: c2c993516d580de47949b60be8e44c81, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 519420031}
@@ -9285,25 +9284,12 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
---- !u!114 &1297478129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1297478126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fa947a33be944f41a28b044e1932c92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoPlayer: {fileID: 1297478128}
 --- !u!1 &1298118183
 GameObject:
   m_ObjectHideFlags: 0
@@ -9605,6 +9591,7 @@ GameObject:
   - component: {fileID: 1353484355}
   - component: {fileID: 1353484354}
   - component: {fileID: 1353484356}
+  - component: {fileID: 1353484357}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -9699,6 +9686,19 @@ MonoBehaviour:
   m_Events:
     m_Signals: []
     m_Events: []
+--- !u!114 &1353484357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353484353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fa947a33be944f41a28b044e1932c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 1297478128}
 --- !u!1 &1355685766
 GameObject:
   m_ObjectHideFlags: 0

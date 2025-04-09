@@ -12,10 +12,8 @@ public class WebGlVideoLoader : MonoBehaviour
     {
 //#if UNITY_WEBGL
         videoPlayer.source = VideoSource.Url;
-        videoPlayer.url = Application.streamingAssetsPath + "/Titles.mp4";
-//#else
-   //     videoPlayer.clip = videoClip;
-//#endif
+        videoPlayer.url = Application.streamingAssetsPath + "/Titles.mp4"; 
+ //#endif
 
         videoPlayer.audioOutputMode = VideoAudioOutputMode.None; // временно убираем звук, если нужен
         videoPlayer.prepareCompleted += OnPrepared;
@@ -24,6 +22,6 @@ public class WebGlVideoLoader : MonoBehaviour
 
     void OnPrepared(VideoPlayer vp)
     {
-        vp.Play();
+       // vp.Play();
     }
 }
